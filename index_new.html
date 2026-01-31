@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>海洋公園遊覽建議</title>
+    <style>
+        :root {
+            --bg-image: url('ocean_park_bg.jpg');
+            --overlay-color: rgba(255, 255, 255, 0.8);
+            --accent-color: #0077be;
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif; background: #f0f2f5; }
+
+        /* 背景與容器 */
+        .main-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-image) no-repeat center center;
+            background-size: cover; z-index: -1;
+        }
+
+        .scroll-container {
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 20px; box-sizing: border-box;
+            background: var(--overlay-color);
+        }
+
+        header { text-align: center; margin-bottom: 20px; }
+        .user-logo { height: 75px; width: auto; margin-bottom: 10px; }
+
+        /* ✨ 平面圖與 Pinpoint 核心設計 */
+        .map-wrapper {
+            position: relative; /* 這是關鍵：讓 Pin 根據圖來定位 */
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .park-map {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 大頭針樣式 */
+        /* 圓點標籤樣式 */
+        .pin {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #ff3b30; /* 經典紅點 */
+            border: 2px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 8px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        /* 讓圓點有閃爍動畫，吸引注意力 */
+        .pin::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            background-color: #ff3b30;
+            opacity: 0.6;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        
+        /* 碰到的時候變色 */
+        .pin:hover {
+            background-color: #0077be;
+        }
+
+        /* 下方導航卡片 */
+        .nav-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 12px; width: 100%; max-width: 500px;
+        }
+        .nav-card {
+            background: white; border-radius: 15px; padding: 15px;
+            text-align: center; text-decoration: none; color: #333;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            display: flex; flex-direction: column; align-items: center;
+            font-size: 14px; font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-background"></div>
+
+    <div class="scroll-container">
+        <header>
+            <div class="logo-wrapper">
+                <img src="logo2.png" alt="Logo" class="user-logo">
+            </div>
+            <h1 style="font-size: 22px;">香港海洋公園導覽</h1>
+        </header>
+
+        <div class="map-wrapper">
+            <img src="TC_GuideMap 2025_V2_POI V3.jpg" alt="Ocean Park Map" class="park-map">
+        
+            <a href="GA.html" class="pin" style="top: 53.2%; left: 37.4%;" title="海洋奇觀"></a>
+            <a href="AAA.html" class="pin" style="top: 30.9%; left: 18.4%;" title="亞洲動物天地"></a>
+            <a href="AIA.html" class="pin" style="top: 44.3%; left: 17.7%;" title="樹懶與好友"></a>
+            <a href="oldstreet.html" class="pin" style="top: 41.3%; left: 19.8%;" title="香港老大街"></a>
+            <a href="CC.html" class="pin" style="top: 49.1%; left: 12.3%;" title="纜車站（夢幻水都）"></a>
+            <a href="thai.html" class="pin" style="top: 57.7%; left: 24.4%;" title="爐炭燒"></a>
+        
+            <a href="ST.html" class="pin" style="top: 43.9%; left: 33.3%;" title="四川奇珍館"></a>
+            <a href="OE.html" class="pin" style="top: 41.1%; left: 27.9%;" title="海洋列車"></a>
+            <a href="MTA.html" class="pin" style="top: 17.4%; left: 32.9%;" title="小狐獴與大象龜之旅"></a>
+            <a href="NP.html" class="pin" style="top: 34.5%; left: 42.7%;" title="北極之旅"></a>
+            <a href="SP.html" class="pin" style="top: 31.8%; left: 47.3%;" title="南極奇觀"></a>
+            <a href="RF.html" class="pin" style="top: 35.1%; left: 61.5%;" title="熱帶雨林"></a>
+            <a href="PP.html" class="pin" style="top: 49.8%; left: 75.8%;" title="太平洋海岸"></a>
+            <a href="OT.html" class="pin" style="top: 40.7%; left: 70.5%;" title="海豚探秘（海洋劇場）"></a>
+            <a href="SM.html" class="pin" style="top: 17.2%; left: 73.2%;" title="尋鯊探秘"></a>
+            <a href="MMBRC.html" class="pin" style="top: 45.6%; left: 79.5%;" title="海洋哺乳動物繁殖及研究中心"></a>
+            <a href="penguin.html" class="pin" style="top: 36.1%; left: 39.5%;" title="冰極餐廳"></a>
+        </div>
+
+        <div class="nav-grid">
+            <a href="tips.html" class="nav-card"><span>💡 內行攻略</span></a>
+            <a href="transport.html" class="nav-card"><span>🚇 交通資訊</span></a>
+        </div>
+    </div>
+
+</body>
+</html>
