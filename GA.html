@@ -3,51 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>展館介紹 - 海洋公園導覽</title>
     <style>
-        body { font-family: -apple-system, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fdfdfd; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 25px; }
+        .back-link { text-decoration: none; color: #0077be; font-weight: bold; display: block; margin-bottom: 20px; }
         
-        /* 返回按鈕 */
-        .back-btn {
-            display: inline-block; text-decoration: none; color: #0077be;
-            font-weight: bold; margin-bottom: 20px; font-size: 16px;
-        }
+        /* 展館標題區 */
+        .hero-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h1 { margin: 0 0 10px 0; color: #222; font-size: 26px; }
+        .tag { background: #e1f5fe; color: #0077be; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: bold; }
 
-        /* 內容區塊 */
-        .content-card {
-            background: white; border-radius: 20px; padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        h1 { margin-top: 0; color: #222; }
-        .tag { 
-            display: inline-block; padding: 4px 12px; border-radius: 50px; 
-            font-size: 12px; background: #e1f5fe; color: #0077be; margin-bottom: 15px;
-        }
+        /* 章節標題 */
+        h2 { font-size: 18px; border-left: 4px solid #0077be; padding-left: 10px; margin-top: 30px; }
 
-        /* 專業知識區塊 (你的專屬特色) */
+        /* 動物介紹按鈕 */
+        .animal-btn {
+            display: inline-block; width: 100%; text-align: center; padding: 15px; margin: 10px 0;
+            background: #fff; border: 2px solid #0077be; color: #0077be;
+            border-radius: 12px; text-decoration: none; font-weight: bold; transition: 0.3s;
+        }
+        .animal-btn:hover { background: #0077be; color: #fff; }
+
+        /* 員工小貼士 (研究員視角) */
         .pro-tips {
-            background: #f0f7ff; border-left: 5px solid #0077be;
-            padding: 15px; margin-top: 25px; border-radius: 0 10px 10px 0;
+            background: #fff9c4; border-radius: 15px; padding: 20px; margin-top: 30px;
+            position: relative; overflow: hidden;
         }
-        .pro-tips h3 { margin-top: 0; font-size: 16px; color: #0077be; }
+        .pro-tips::before { content: '💡'; position: absolute; right: 10px; bottom: -5px; font-size: 50px; opacity: 0.1; }
+        .pro-tips h3 { margin-top: 0; font-size: 16px; color: #827717; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="index.html" class="back-btn">← 返回園區地圖</a>
+    <a href="index.html" class="back-link">← 返回地圖</a>
 
-    <div class="content-card">
-        <div class="tag">展館介紹</div>
+    <div class="hero-section">
+        <span class="tag">展館介紹</span>
         <h1>海洋劇場 (Sea Theatre)</h1>
-        
-        <p>這裡是觀賞海豚與海獅表演的地方，可以感受到海洋生物的活力！</p>
+        <p>座落於高峰樂園，是欣賞海洋生物動感演出的核心地標，也是俯瞰南中國海美景的絕佳地點。</p>
+    </div>
 
-        <div class="pro-tips">
-            <h3>🐬 研究員的專業視角</h3>
-            <p>作為香港土生土長的鯨豚愛好者，想跟大家分享：觀察海豚游動時，可以注意牠們的尾鰭，那裡其實是<strong>沒有骨頭</strong>的喔！</p>
-        </div>
+    <h2>🐾 動物介紹</h2>
+    <p>想了解更多關於這裡的明星動物嗎？點擊下方查看官方詳細介紹：</p>
+    <a href="https://www.oceanpark.com.hk/tc/park-experience/attractions/bottlenose-dolphin" class="animal-btn" target="_blank">🐬 瓶鼻海豚詳細資料</a>
+    <a href="https://www.oceanpark.com.hk/tc/park-experience/attractions/californian-sea-lion" class="animal-btn" target="_blank">🦭 加州海獅詳細資料</a>
+
+    <h2>👨‍🔬 員工小貼士 (研究員視角)</h2>
+    <div class="pro-tips">
+        <h3>專業點評：</h3>
+        <p>作為香港土生土長且對鯨豚深有研究的人，我要特別提醒：觀察海豚游動時，大家常以為尾鰭有骨，<strong>但其實鯨豚尾鰭是完全沒有骨頭的喔！</strong></p>
+        <p>另外，這裡也是觀察動物聲學互動的好地方，對於我們分析鯨豚鳴叫聲非常有參考價值。</p>
     </div>
 </div>
 
