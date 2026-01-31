@@ -27,18 +27,25 @@
             background: var(--overlay-color);
         }
 
-        header { text-align: center; margin-bottom: 20px; }
-        .user-logo { height: 150px; width: auto; margin-bottom: 0px; }
-
-        /* ✨ 平面圖與 Pinpoint 核心設計 */
-        .map-wrapper {
-            position: relative; /* 這是關鍵：讓 Pin 根據圖來定位 */
+        header {
+            display: flex; /* 開啟並排模式 */
+            align-items: center; /* 垂直置中 */
+            justify-content: center; /* 水平置中 */
+            gap: 15px; /* Logo 與標題之間的間距 */
+            margin-bottom: 20px;
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto 30px auto;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .logo-wrapper img {
+            height: 75px; /* 維持你滿意的 75px 高度 */
+            width: auto;
+            display: block;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px; /* 稍微縮小字體以配合並排 */
+            color: #333;
         }
 
         .park-map {
@@ -107,9 +114,9 @@
     <div class="scroll-container">
         <header>
             <div class="logo-wrapper">
-                <img src="logo2.png" alt="Logo" class="user-logo">
+                <img src="logo2.png" alt="Logo">
             </div>
-            <h1 style="font-size: 22px;">香港海洋公園導覽</h1>
+            <h1>海洋公園導覽建議</h1>
         </header>
 
         <div class="map-wrapper">
