@@ -3,143 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>海洋公園遊覽建議</title>
+    <title>香港海洋公園導覽</title>
     <style>
-        :root {
-            --bg-image: url('ocean_park_bg.jpg');
-            --overlay-color: rgba(255, 255, 255, 0.8);
-            --accent-color: #0077be;
-        }
-
-        body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif; background: #f0f2f5; }
-
-        /* 背景與容器 */
-        .main-background {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-image) no-repeat center center;
-            background-size: cover; z-index: -1;
-        }
-
-        .scroll-container {
-            min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
-            padding: 20px; box-sizing: border-box;
-            background: var(--overlay-color);
-        }
-
-        header { text-align: center; margin-bottom: 20px; }
-        .user-logo { height: 75px; width: auto; margin-bottom: 10px; }
-
-        /* ✨ 平面圖與 Pinpoint 核心設計 */
+        body, html { margin: 0; padding: 0; font-family: -apple-system, sans-serif; background: #f4f4f4; }
+        .scroll-container { display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        
+        /* 1. 地圖容器：確保點位根據這張圖定位 */
         .map-wrapper {
-            position: relative; /* 這是關鍵：讓 Pin 根據圖來定位 */
+            position: relative;
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto 30px auto;
-            border-radius: 20px;
+            max-width: 1000px; /* 配合你 MacBook 大螢幕觀看 */
+            line-height: 0;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: crosshair; /* 變成十字準星方便你對齊 */
         }
 
-        .park-map {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .park-map { width: 100%; height: auto; display: block; }
 
-        /* 大頭針樣式 */
-        /* 圓點標籤樣式 */
+        /* 2. 專業紅點樣式 (取代 Emoji) */
         .pin {
             position: absolute;
             width: 12px;
             height: 12px;
-            background-color: #ff3b30; /* 經典紅點 */
+            background-color: #ff3b30;
             border: 2px solid white;
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 8px rgba(0,0,0,0.3);
-            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
             z-index: 10;
         }
-        
-        /* 讓圓點有閃爍動畫，吸引注意力 */
+
+        /* 3. 點位微動動畫：讓朋友知道這可以按 */
         .pin::after {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
+            width: 100%; height: 100%;
             border-radius: 50%;
-            background-color: #ff3b30;
-            opacity: 0.6;
+            background: inherit;
             animation: pulse 2s infinite;
         }
-        
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.6; }
+            0% { transform: scale(1); opacity: 1; }
             100% { transform: scale(3); opacity: 0; }
         }
-        
-        /* 碰到的時候變色 */
-        .pin:hover {
-            background-color: #0077be;
-        }
 
-        /* 下方導航卡片 */
-        .nav-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 12px; width: 100%; max-width: 500px;
-        }
-        .nav-card {
-            background: white; border-radius: 15px; padding: 15px;
-            text-align: center; text-decoration: none; color: #333;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            display: flex; flex-direction: column; align-items: center;
-            font-size: 14px; font-weight: bold;
-        }
+        header { text-align: center; margin-bottom: 20px; }
+        .logo-wrapper img { height: 75px; } /* 保持你滿意的 75px 比例 */
     </style>
 </head>
 <body>
 
-    <div class="main-background"></div>
-
     <div class="scroll-container">
         <header>
             <div class="logo-wrapper">
-                <img src="logo2.png" alt="Logo" class="user-logo">
+                <img src="logo2.png" alt="Logo">
             </div>
-            <h1 style="font-size: 22px;">香港海洋公園導覽</h1>
+            <h1>海洋公園導覽建議</h1>
+            <p style="color: #666; font-size: 14px;">點擊地圖上的紅點查看介紹</p>
         </header>
 
-        <div class="map-wrapper">
-            <img src="TC_GuideMap 2025_V2_POI V3.jpg" alt="Ocean Park Map" class="park-map">
-        
-            <a href="GA.html" class="pin" style="top: 64.5%; left: 43.6%;" title="GA"></a>
-            <a href="AAA.html" class="pin" style="top: 37.6%; left: 21.6%;" title="亞洲動物天地"></a>
-            <a href="AIA.html" class="pin" style="top: 53.7%; left: 20.5%;" title="夢幻水都"></a>
-            <a href="oldstreet.html" class="pin" style="top: 50.3%; left: 23.2%;" title="香港老大街"></a>
-            <a href="CC.html" class="pin" style="top: 59.4%; left: 14.3%;" title="纜車站"></a>
-            <a href="thai.html" class="pin" style="top: 70.0%; left: 28.5%;" title="爐炭燒"></a>
-        
-            <a href="ST.html" class="pin" style="top: 53.3%; left: 39.0%;" title="海洋劇場"></a>
-            <a href="OE.html" class="pin" style="top: 49.7%; left: 32.7%;" title="海洋列車"></a>
-            <a href="MTA.html" class="pin" style="top: 21.3%; left: 38.4%;" title="動感天地"></a>
-            <a href="NP.html" class="pin" style="top: 42.2%; left: 49.3%;" title="尋鯊探秘"></a>
-            <a href="SP.html" class="pin" style="top: 38.4%; left: 55.3%;" title="南極奇珍"></a>
-            <a href="RF.html" class="pin" style="top: 42.7%; left: 71.9%;" title="熱帶雨林"></a>
-            <a href="PP.html" class="pin" style="top: 60.6%; left: 88.4%;" title="尋鯊探秘"></a>
-            <a href="OT.html" class="pin" style="top: 49.8%; left: 82.3%;" title="高峰樂園"></a>
-            <a href="SM.html" class="pin" style="top: 21.1%; left: 85.4%;" title="翻天覆地"></a>
-            <a href="MMBRC.html" class="pin" style="top: 55.4%; left: 92.7%;" title="研究中心"></a>
-            <a href="penguin.html" class="pin" style="top: 44.0%; left: 46.0%;" title="冰極餐廳"></a>
-        </div>
+        <div class="map-wrapper" id="map-clicker">
+            <img src="TC_GuideMap 2025_V2_POI V3.jpg" alt="Map" class="park-map">
 
-        <div class="nav-grid">
-            <a href="tips.html" class="nav-card"><span>💡 內行攻略</span></a>
-            <a href="transport.html" class="nav-card"><span>🚇 交通資訊</span></a>
-        </div>
+            <a href="ST.html" class="pin" style="top: 48.5%; left: 63.2%;" title="海洋劇場"></a>
+            <a href="MMBRC.html" class="pin" style="top: 51.4%; left: 74.8%;" title="研究中心"></a>
+            </div>
     </div>
+
+    <script>
+        document.getElementById('map-clicker').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            // 這會直接在你的 MacBook 畫面彈出正確的百分比
+            const result = `style="top: ${y.toFixed(1)}%; left: ${x.toFixed(1)}%;"`;
+            console.log(result);
+            alert("找到座標了！請複製這段到代碼中：\n" + result);
+        });
+    </script>
 
 </body>
 </html>
