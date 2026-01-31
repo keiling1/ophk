@@ -6,13 +6,14 @@
     <title>海洋公園遊覽建議</title>
     <style>
         :root {
-            --bg-image: url('ocean_park_bg.jpg'); /* 建議換成海洋公園風景照 */
-            --overlay-color: rgba(255, 255, 255, 0.7);
-            --accent-color: #0077be; /* 海洋藍色系 */
+            --bg-image: url('ocean_park_bg.jpg');
+            --overlay-color: rgba(255, 255, 255, 0.8);
+            --accent-color: #0077be;
         }
 
-        body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif; }
+        body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif; background: #f0f2f5; }
 
+        /* 背景與容器 */
         .main-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-image) no-repeat center center;
@@ -22,130 +23,102 @@
         .scroll-container {
             min-height: 100vh;
             display: flex; flex-direction: column; align-items: center;
-            padding: 40px 20px; box-sizing: border-box;
+            padding: 20px; box-sizing: border-box;
             background: var(--overlay-color);
         }
 
-        header { text-align: center; margin-bottom: 25px; }
-        h1 { margin: 0; font-size: 26px; color: #333; letter-spacing: 1px; }
+        header { text-align: center; margin-bottom: 20px; }
+        .user-logo { height: 75px; width: auto; margin-bottom: 10px; }
+
+        /* ✨ 平面圖與 Pinpoint 核心設計 */
+        .map-wrapper {
+            position: relative; /* 這是關鍵：讓 Pin 根據圖來定位 */
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .park-map {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 大頭針樣式 */
+        .pin {
+            position: absolute;
+            text-decoration: none;
+            font-size: 24px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate(-50%, -100%); /* 讓尖端對準坐標 */
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            transition: transform 0.2s;
+            cursor: pointer;
+            z-index: 10;
+        }
         
-        /* 延用你滿意的 Logo 比例 */
-        .logo-wrapper {
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 10px;
-        }
-        .user-logo { height: 75px; width: auto; display: block; } /* 保持 75px 高度 */
+        .pin:active { transform: translate(-50%, -100%) scale(1.5); }
 
-        /* 平面圖點位設計 */
-        .map-section {
-            width: 100%; max-width: 500px;
-            margin-bottom: 25px; position: relative;
-        }
-        .park-map { width: 100%; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); display: block; }
-
-        .map-dot {
-            position: absolute; background: white; border-radius: 50%;
-            width: 38px; height: 38px; display: flex;
-            align-items: center; justify-content: center; font-size: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            text-decoration: none; transform: translate(-50%, -50%);
-            transition: 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-        }
-        .map-dot:active { transform: translate(-50%, -50%) scale(1.3); }
-
-        /* 下方快捷按鈕 */
+        /* 下方導航卡片 */
         .nav-grid {
             display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 15px; width: 100%; max-width: 500px;
+            gap: 12px; width: 100%; max-width: 500px;
         }
         .nav-card {
-            background: white; border-radius: 18px; padding: 15px;
-            text-align: center; text-decoration: none; color: #444;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            background: white; border-radius: 15px; padding: 15px;
+            text-align: center; text-decoration: none; color: #333;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             display: flex; flex-direction: column; align-items: center;
-            border: 1px solid rgba(0,0,0,0.03);
+            font-size: 14px; font-weight: bold;
         }
-        .nav-card .icon { font-size: 28px; margin-bottom: 5px; }
-        .nav-card span { font-weight: bold; font-size: 14px; }
-
-        /* 告示樣式 */
-        #alert-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 9999;
-            display: flex; justify-content: center; align-items: center;
-            visibility: hidden; opacity: 0; transition: 0.3s;
-        }
-        .alert-box {
-            background: white; padding: 25px; border-radius: 25px; width: 85%; max-width: 320px;
-            text-align: center;
-        }
-        .show { visibility: visible !important; opacity: 1 !important; }
     </style>
 </head>
 <body>
 
     <div class="main-background"></div>
 
-    <div id="alert-overlay">
-        <div class="alert-box">
-            <div style="font-size: 40px;">📢</div>
-            <h2 style="margin: 10px 0; color: #333;">今日導覽建議</h2>
-            <p id="alert-content" style="color: #666; line-height: 1.5;">正在獲取最新園區動態...</p>
-            <button style="background: var(--accent-color); color: white; border: none; padding: 10px 30px; border-radius: 20px; margin-top: 15px;" 
-                    onclick="document.getElementById('alert-overlay').classList.remove('show')">收到</button>
-        </div>
-    </div>
-
     <div class="scroll-container">
         <header>
             <div class="logo-wrapper">
                 <img src="logo2.png" alt="Logo" class="user-logo">
             </div>
-            <h1>海洋公園遊覽建議</h1>
-            <p style="color: #666; font-size: 14px;">給最親愛的朋友們 🇭🇰</p>
+            <h1 style="font-size: 22px;">香港海洋公園導覽</h1>
         </header>
 
-        <div class="map-section">
-            <img src="op_map_image.jpg" alt="園區地圖" class="park-map">
-            
-            <a href="dolphin.html" class="map-dot" style="top: 35%; left: 30%;">🐬</a>
-            <a href="panda.html" class="map-dot" style="top: 65%; left: 45%;">🐼</a>
-            <a href="cablecar.html" class="map-dot" style="top: 20%; left: 70%;">🚠</a>
-            <a href="rollercoaster.html" class="map-dot" style="top: 50%; left: 80%;">🎢</a>
+        <div class="map-wrapper">
+            <img src="TC_GuideMap 2025_V2_POI V3.jpg" alt="Ocean Park Map" class="park-map">
+
+            <a href="GA.html" class="pin" style="top: 50.8%; left: 43.6%;" title="GA">📍</a>
+            <a href="AAA.html" class="pin" style="top: 29.6%; left: 21.6%;" title="AAA">📍</a>
+            <a href="ST.html" class="pin" style="top: 42.0%; left: 39.0%;" title="海洋劇場">🐬</a>
+            <a href="AIA.html" class="pin" style="top: 42.3%; left: 20.5%;" title="AIA">📍</a>
+            <a href="oldstreet.html" class="pin" style="top: 39.6%; left: 23.2%;" title="香港老大街">🇭🇰</a>
+            <a href="OE.html" class="pin" style="top: 39.1%; left: 32.7%;" title="高峰樂園">🎡</a>
+            <a href="MTA.html" class="pin" style="top: 16.8%; left: 38.4%;" title="MTA">📍</a>
+            <a href="NP.html" class="pin" style="top: 33.3%; left: 49.3%;" title="北極之旅">🧊</a>
+            <a href="SP.html" class="pin" style="top: 30.2%; left: 55.3%;" title="SP">📍</a>
+            <a href="RF.html" class="pin" style="top: 33.6%; left: 71.9%;" title="RF">📍</a>
+            <a href="CC.html" class="pin" style="top: 46.8%; left: 14.3%;" title="CCW">🚠</a>
+            <a href="PP.html" class="pin" style="top: 47.7%; left: 88.4%;" title="PP">📍</a>
+            <a href="OT.html" class="pin" style="top: 39.2%; left: 82.3%;" title="OT">📍</a>
+            <a href="SM.html" class="pin" style="top: 16.6%; left: 85.4%;" title="SM">📍</a>
+            <a href="MMBRC.html" class="pin" style="top: 43.6%; left: 92.7%;" title="解剖研究中心">🔬</a>
+            <a href="thai.html" class="pin" style="top: 55.1%; left: 28.5%;" title="泰國菜">🍲</a>
+            <a href="penguin.html" class="pin" style="top: 34.7%; left: 46.0%;" title="冰極餐廳">🐧</a>
         </div>
 
         <div class="nav-grid">
-            <a href="transport.html" class="nav-card">
-                <div class="icon">🚇</div><span>交通地鐵</span>
-            </a>
-            <a href="food.html" class="nav-card">
-                <div class="icon">🍔</div><span>美食推薦</span>
-            </a>
-            <a href="tips.html" class="nav-card">
-                <div class="icon">💡</div><span>在地人撇步</span>
-            </a>
-            <a href="showtime.html" class="nav-card">
-                <div class="icon">🕒</div><span>表演時間表</span>
-            </a>
+            <a href="tips.html" class="nav-card"><span>💡 內行攻略</span></a>
+            <a href="transport.html" class="nav-card"><span>🚇 交通資訊</span></a>
         </div>
     </div>
 
-    <script>
-        // 建議連結到 Google Sheet CSV 以實現「遠端即時修改告示」功能
-        const sheetUrl = 'YOUR_CSV_URL_HERE'; 
-
-        async function updateAlert() {
-            try {
-                const response = await fetch(sheetUrl);
-                const text = await response.text();
-                document.getElementById('alert-content').innerText = text.split('\n')[0];
-            } catch (e) {
-                // 失敗時的預設溫馨提示
-                document.getElementById('alert-content').innerText = '今日園區人潮適中，建議先搭海洋列車上山！';
-            }
-            setTimeout(() => { document.getElementById('alert-overlay').classList.add('show'); }, 1200);
-        }
-        window.onload = updateAlert;
-    </script>
 </body>
 </html>
