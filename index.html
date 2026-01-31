@@ -52,6 +52,7 @@
         .park-map { width: 100%; height: auto; display: block; border-radius: 15px; }
 
         /* 3. 專業紅點與 Tooltip 設計 */
+        /* 修改後的紅點樣式 */
         .pin {
             position: absolute;
             width: 12px;
@@ -61,32 +62,38 @@
             border-radius: 50%;
             transform: translate(-50%, -50%);
             cursor: pointer;
-            z-index: 10;
+            z-index: 10; /* 平時層級為 10 */
         }
-
-        /* 小方格 Tooltip */
+        
+        /* 關鍵修正：當游標靠近時，提升整個點位（連同方格）到最前方 */
+        .pin:hover {
+            z-index: 999; 
+            background-color: #0077be;
+        }
+        
+        /* 小方格 Tooltip 樣式優化 */
         .pin .tooltip {
             visibility: hidden;
-            background-color: rgba(0, 0, 0, 0.85); /* 稍微深一點更清晰 */
+            background-color: rgba(0, 0, 0, 0.85);
             color: #fff;
             text-align: center;
-            padding: 10px; /* 增加內邊距 */
+            padding: 10px 15px; /* 增加左右間距防止字體太擠 */
             border-radius: 8px;
             position: absolute;
-            bottom: 180%; /* 稍微調高一點，避免擋到點位 */
+            bottom: 150%; /* 距離紅點再高一點點 */
             left: 50%;
             transform: translateX(-50%);
             
-            /* 解決重疊的關鍵屬性 */
-            width: auto; /* 讓寬度隨文字自動伸展 */
-            min-width: 100px; /* 設定最小寬度 */
-            white-space: nowrap; /* 防止文字強制換行 */
-            line-height: 1.6; /* 增加行間距，字就不會重疊了 */
-            font-size: 13px; /* 稍微放大一點點方便閱讀 */
+            /* 確保文字清晰不重疊 */
+            min-width: 120px;
+            white-space: nowrap;
+            line-height: 1.5; /* 設定固定行高 */
+            font-size: 14px;
             
             opacity: 0;
             transition: opacity 0.3s;
-            pointer-events: none; /* 防止游標干擾 */
+            pointer-events: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* 增加陰影讓方格更立體 */
         }
 
         /* 小箭頭 */
@@ -135,35 +142,37 @@
             <h1>海洋公園導覽建議</h1>
         </header>
 
-        <div class="map-wrapper" id="map-clicker">
-            <img src="TC_GuideMap 2025_V2_POI V3.jpg" alt="Ocean Park Map" class="park-map">
-                
-            <a href="GA.html" class="pin" style="top: 53.2%; left: 37.4%;"><span class="tooltip">海洋奇觀<br>動物展館</span></a>
-            <a href="AAA.html" class="pin" style="top: 30.9%; left: 18.4%;"><span class="tooltip">亞洲動物天地<br>動物展館</span></a>
-            <a href="AIA.html" class="pin" style="top: 44.3%; left: 17.7%;"><span class="tooltip">樹懶與好友<br>動物展館</span></a>
-            <a href="oldstreet.html" class="pin" style="top: 41.3%; left: 19.8%;"><span class="tooltip">香港老大街<br>景點</span></a>
-            <a href="CC.html" class="pin" style="top: 49.1%; left: 12.3%;"><span class="tooltip">纜車站（夢幻水都）<br>園內交通</span></a>
-            <a href="CC.html" class="pin" style="top: 22.3%; left: 61.3%;"><span class="tooltip">纜車站（高峰樂園）<br>園內交通</span></a>
-            <a href="thai.html" class="pin" style="top: 57.7%; left: 24.4%;"><span class="tooltip">爐炭燒"<br>泰國餐廳</span></a>
         
-            <a href="ST.html" class="pin" style="top: 43.9%; left: 33.3%;"><span class="tooltip">四川奇珍館<br>動物展館</span></a>
-            <a href="OE.html" class="pin" style="top: 41.1%; left: 27.9%;"><span class="tooltip">海洋列車（夢幻水都）<br>園內交通</span></a>
-            <a href="OE.html" class="pin" style="top: 52.1%; left: 50.6%;"><span class="tooltip">海洋列車（高峰樂園）<br>園內交通</span></a>
-            <a href="MTA.html" class="pin" style="top: 17.4%; left: 32.9%;"><span class="tooltip">小狐獴與大象龜之旅<br>動物展館</span></a>
-            <a href="NP.html" class="pin" style="top: 34.5%; left: 42.7%;"><span class="tooltip">北極之旅<br>動物展館</span></a>
-            <a href="SP.html" class="pin" style="top: 31.8%; left: 47.3%;"><span class="tooltip">南極奇觀<br>動物展館</span></a>
-            <a href="RF.html" class="pin" style="top: 35.1%; left: 61.5%;"><span class="tooltip">熱帶雨林<br>動物展館</span></a>
-            <a href="PP.html" class="pin" style="top: 49.8%; left: 75.8%;"><span class="tooltip">太平洋海岸<br>動物展館</span></a>
-            <a href="OT.html" class="pin" style="top: 40.7%; left: 70.5%;"><span class="tooltip">海豚探秘（海洋劇場）<br>動物展館</span></a>
-            <a href="SM.html" class="pin" style="top: 17.2%; left: 73.2%;"><span class="tooltip">尋鯊探秘<br>動物展館</span></a>
-            <a href="MMBRC.html" class="pin" style="top: 45.6%; left: 79.5%;"><span class="tooltip">海洋哺乳動物繁殖及研究中心<br>動物展館</span></a>
-            <a href="penguin.html" class="pin" style="top: 36.1%; left: 39.5%;"><span class="tooltip">冰極餐廳<br>西式餐廳</span></a>
-        </div>
-
         <div class="nav-grid">
             <a href="tips.html" class="nav-card"><span>💡 內行攻略</span></a>
             <a href="transport.html" class="nav-card"><span>🚇 交通資訊</span></a>
         </div>
+        
+        <div class="map-wrapper" id="map-clicker">
+            <img src="TC_GuideMap 2025_V2_POI V3.jpg" alt="Ocean Park Map" class="park-map">
+                
+            <a href="GA.html" class="pin" style="top: 53.2%; left: 37.4%;"><span class="tooltip">海洋奇觀<br>（動物展館）</span></a>
+            <a href="AAA.html" class="pin" style="top: 30.9%; left: 18.4%;"><span class="tooltip">亞洲動物天地<br>（動物展館）</span></a>
+            <a href="AIA.html" class="pin" style="top: 44.3%; left: 17.7%;"><span class="tooltip">樹懶與好友<br>（動物展館）</span></a>
+            <a href="oldstreet.html" class="pin" style="top: 41.3%; left: 19.8%;"><span class="tooltip">香港老大街<br>（景點）</span></a>
+            <a href="CC.html" class="pin" style="top: 49.1%; left: 12.3%;"><span class="tooltip">纜車站（夢幻水都）<br>（園內交通）</span></a>
+            <a href="CC.html" class="pin" style="top: 22.3%; left: 61.3%;"><span class="tooltip">纜車站（高峰樂園）<br>（園內交通）</span></a>
+            <a href="thai.html" class="pin" style="top: 57.7%; left: 24.4%;"><span class="tooltip">爐炭燒<br>（泰國餐廳）</span></a>
+        
+            <a href="ST.html" class="pin" style="top: 43.9%; left: 33.3%;"><span class="tooltip">四川奇珍館<br>（動物展館）</span></a>
+            <a href="OE.html" class="pin" style="top: 41.1%; left: 27.9%;"><span class="tooltip">海洋列車（夢幻水都）<br>（園內交通）</span></a>
+            <a href="OE.html" class="pin" style="top: 52.1%; left: 50.6%;"><span class="tooltip">海洋列車（高峰樂園）<br>（園內交通）</span></a>
+            <a href="MTA.html" class="pin" style="top: 17.4%; left: 32.9%;"><span class="tooltip">小狐獴與大象龜之旅<br>（動物展館）</span></a>
+            <a href="NP.html" class="pin" style="top: 34.5%; left: 42.7%;"><span class="tooltip">北極之旅<br>（動物展館）</span></a>
+            <a href="SP.html" class="pin" style="top: 31.8%; left: 47.3%;"><span class="tooltip">南極奇觀<br>（動物展館）</span></a>
+            <a href="RF.html" class="pin" style="top: 35.1%; left: 61.5%;"><span class="tooltip">熱帶雨林<br>（動物展館）</span></a>
+            <a href="PP.html" class="pin" style="top: 49.8%; left: 75.8%;"><span class="tooltip">太平洋海岸<br>（動物展館）</span></a>
+            <a href="OT.html" class="pin" style="top: 40.7%; left: 70.5%;"><span class="tooltip">海豚探秘（海洋劇場）<br>（動物展館）</span></a>
+            <a href="SM.html" class="pin" style="top: 17.2%; left: 73.2%;"><span class="tooltip">尋鯊探秘<br>（動物展館）</span></a>
+            <a href="MMBRC.html" class="pin" style="top: 45.6%; left: 79.5%;"><span class="tooltip">海洋哺乳動物繁殖及研究中心<br>（動物展館）</span></a>
+            <a href="penguin.html" class="pin" style="top: 36.1%; left: 39.5%;"><span class="tooltip">冰極餐廳<br>（西式餐廳）</span></a>
+        </div>
+
     </div>
 
     <script>
