@@ -56,7 +56,7 @@
             position: absolute;
             width: 12px;
             height: 12px;
-            background-color: #FF8F8F;
+            background-color: #EA2264;
             border: 2px solid white;
             border-radius: 50%;
             transform: translate(-50%, -50%);
@@ -65,11 +65,11 @@
         }
         /* 藍色點位（餐廳） */
         .pin.blue {
-            background-color: #C2E2FA;
+            background-color: #0D1164;
         }
         
         .pin.blue::after {
-            background-color: #C2E2FA; /* 讓閃爍光圈也變色 */
+            background-color: #0D1164; /* 讓閃爍光圈也變色 */
         }
         
         /* 紫色點位（園內交通） */
@@ -78,22 +78,22 @@
         }
         
         .pin.purple::after {
-            background-color: #B7A3E3;
+            background-color: #640D5F;
         }
         
         /* 黃色點位（景點） */
         .pin.yellow {
-            background-color: #FFF1CB;
+            background-color: #640D5F;
         }
         
         .pin.yellow::after {
-            background-color: #FFF1CB;
+            background-color: #F78D60;
         }
         
         /* 關鍵修正：當游標靠近時，提升整個點位（連同方格）到最前方 */
         .pin:hover {
             z-index: 999; 
-            background-color: #0077be;
+            background-color: #F78D60;
         }
         
         /* 小方格 Tooltip 樣式優化 */
