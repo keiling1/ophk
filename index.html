@@ -67,19 +67,26 @@
         /* 小方格 Tooltip */
         .pin .tooltip {
             visibility: hidden;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.85); /* 稍微深一點更清晰 */
             color: #fff;
             text-align: center;
-            padding: 5px 10px;
-            border-radius: 6px;
+            padding: 10px; /* 增加內邊距 */
+            border-radius: 8px;
             position: absolute;
-            bottom: 150%;
+            bottom: 180%; /* 稍微調高一點，避免擋到點位 */
             left: 50%;
             transform: translateX(-50%);
-            white-space: nowrap;
-            font-size: 12px;
+            
+            /* 解決重疊的關鍵屬性 */
+            width: auto; /* 讓寬度隨文字自動伸展 */
+            min-width: 100px; /* 設定最小寬度 */
+            white-space: nowrap; /* 防止文字強制換行 */
+            line-height: 1.6; /* 增加行間距，字就不會重疊了 */
+            font-size: 13px; /* 稍微放大一點點方便閱讀 */
+            
             opacity: 0;
             transition: opacity 0.3s;
+            pointer-events: none; /* 防止游標干擾 */
         }
 
         /* 小箭頭 */
