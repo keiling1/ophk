@@ -41,22 +41,23 @@
         /* 1. 確保包圍容器具備相對定位，且能橫向滑動 */
         .map-wrapper {
             position: relative;
-            width: 100%;
-            max-width: 1000px; /* PC 版的最大寬度 */
-            margin: 40px auto;
-            overflow-x: auto; /* 手機版允許左右滑動 */
+            width: 95%; /* 給手機留一點邊距 */
+            max-width: 1000px;
+            margin: 20px auto;
+            overflow-x: auto; /* 允許橫向滑動 */
             overflow-y: hidden;
-            -webkit-overflow-scrolling: touch; /* 讓手機滑動更順暢 */
+            -webkit-overflow-scrolling: touch; 
             border-radius: 15px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-            /* 核心修正：取消 Flexbox 對齊，防止內部元素縮小 */
-            display: block; 
+            /* 關鍵：確保它不是 flex 容器，避免子元素縮放 */
+            display: block !important; 
         }
         
-        /* 2. 讓地圖在手機上維持最小寬度，不要縮得太小 */
+        /* 2. 讓地圖在手機上維持固定寬度，這是點位對準的基準 */
         .park-map {
-            min-width: 1000px; /* 關鍵：設定與點位座標偵測時一致的寬度 */
-            width: 100%;
+            width: 1000px !important; /* 強制寬度與你測量座標時一致 */
+            min-width: 1000px !important;
+            max-width: none !important; /* 防止被父層限制 */
             height: auto;
             display: block;
             border-radius: 15px;
