@@ -16,13 +16,34 @@
         /* 章節標題 */
         h2 { font-size: 18px; border-left: 4px solid #0077be; padding-left: 10px; margin-top: 30px; }
 
-        /* 動物介紹按鈕 */
-        .animal-btn {
-            display: inline-block; width: 100%; text-align: center; padding: 15px; margin: 10px 0;
-            background: #fff; border: 2px solid #0077be; color: #0077be;
-            border-radius: 12px; text-decoration: none; font-weight: bold; transition: 0.3s;
+        /* 按鈕群組容器 */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 一行兩個，平均分配寬度 */
+            gap: 10px; /* 按鈕之間的間距 */
+            margin: 15px 0;
         }
-        .animal-btn:hover { background: #0077be; color: #fff; }
+        
+        /* 稍微調整按鈕樣式，讓它在並排時不會太擠 */
+        .animal-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 5px; /* 縮減上下內邊距 */
+            background: #fff;
+            border: 2px solid #0077be;
+            color: #0077be;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        
+        .animal-btn:hover {
+            background: #0077be;
+            color: #fff;
+        }
 
         /* 員工小貼士 (研究員視角) */
         .pro-tips {
@@ -46,12 +67,13 @@
 
     <h2>🐾 動物介紹</h2>
     <p>想了解更多關於這裡的明星動物嗎？點擊下方查看官方詳細介紹：</p>
-    <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/giant-grouper" class="animal-btn" target="_blank">花尾龍躉 Giant Grouper</a>
-    <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/milkfish" class="animal-btn" target="_blank">牛奶魚 Milkfish</a>        
-    <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/manta-ray" class="animal-btn" target="_blank">角鵬 Manta Ray</a>
-    <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/napoleon-fish" class="animal-btn" target="_blank">蘇眉 Napoleon Fish</a>
-    <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/yellow-seahorse%20" class="animal-btn" target="_blank">黃海馬 Yellow Seahorse</a>
-
+    <div class="button-group">
+        <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/giant-grouper" class="animal-btn" target="_blank">花尾龍躉 Giant Grouper</a>
+        <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/milkfish" class="animal-btn" target="_blank">牛奶魚 Milkfish</a>        
+        <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/manta-ray" class="animal-btn" target="_blank">角鵬 Manta Ray</a>
+        <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/napoleon-fish" class="animal-btn" target="_blank">蘇眉 Napoleon Fish</a>
+        <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/yellow-seahorse%20" class="animal-btn" target="_blank">黃海馬 Yellow Seahorse</a>
+    </div>
     <h2>👨‍🔬 員工小貼士 (研究員視角)</h2>
     <div class="pro-tips">
         <h3>專業點評：</h3>
