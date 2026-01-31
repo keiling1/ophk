@@ -43,13 +43,28 @@
             position: relative;
             width: 100%;
             max-width: 1000px;
-            margin: 0 auto 50px auto; /* 增加地圖上下的空間 */
-            line-height: 0;
+            margin: 40px auto;
+            overflow-x: auto; /* 允許橫向滑動 */
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch; /* 讓手機滑動具備慣性，更流暢 */
             border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            /* 讓容器內的內容垂直置中，防止小螢幕高度跑位 */
+            display: flex;
+            justify-content: flex-start;
         }
 
-        .park-map { width: 100%; height: auto; display: block; border-radius: 15px; }
-
+        .park-map {
+            /* 這裡設定 min-width 為 1000px 是聰明的做法 */
+            /* 它保證了在 iPhone 等小螢幕上，地圖不會縮小到點不準 */
+            min-width: 1000px; 
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 15px;
+            /* 防止圖片被 Flexbox 壓縮 */
+            flex-shrink: 0;
+        }
         /* 3. 專業紅點與 Tooltip 設計 */
         /* 修改後的紅點樣式 */
         .pin {
