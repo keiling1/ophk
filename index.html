@@ -48,23 +48,43 @@
         }
 
         /* 大頭針樣式 */
+        /* 圓點標籤樣式 */
         .pin {
             position: absolute;
-            text-decoration: none;
-            font-size: 24px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: translate(-50%, -100%); /* 讓尖端對準坐標 */
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-            transition: transform 0.2s;
+            width: 12px;
+            height: 12px;
+            background-color: #ff3b30; /* 經典紅點 */
+            border: 2px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 8px rgba(0,0,0,0.3);
             cursor: pointer;
             z-index: 10;
         }
         
-        .pin:active { transform: translate(-50%, -100%) scale(1.5); }
+        /* 讓圓點有閃爍動畫，吸引注意力 */
+        .pin::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            background-color: #ff3b30;
+            opacity: 0.6;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+        
+        /* 碰到的時候變色 */
+        .pin:hover {
+            background-color: #0077be;
+        }
 
         /* 下方導航卡片 */
         .nav-grid {
@@ -95,23 +115,24 @@
         <div class="map-wrapper">
             <img src="TC_GuideMap 2025_V2_POI V3.jpg" alt="Ocean Park Map" class="park-map">
 
-            <a href="GA.html" class="pin" style="top: 50.8%; left: 43.6%;" title="GA">📍</a>
-            <a href="AAA.html" class="pin" style="top: 29.6%; left: 21.6%;" title="AAA">📍</a>
-            <a href="ST.html" class="pin" style="top: 42.0%; left: 39.0%;" title="海洋劇場">🐬</a>
-            <a href="AIA.html" class="pin" style="top: 42.3%; left: 20.5%;" title="AIA">📍</a>
-            <a href="oldstreet.html" class="pin" style="top: 39.6%; left: 23.2%;" title="香港老大街">🇭🇰</a>
-            <a href="OE.html" class="pin" style="top: 39.1%; left: 32.7%;" title="高峰樂園">🎡</a>
-            <a href="MTA.html" class="pin" style="top: 16.8%; left: 38.4%;" title="MTA">📍</a>
-            <a href="NP.html" class="pin" style="top: 33.3%; left: 49.3%;" title="北極之旅">🧊</a>
-            <a href="SP.html" class="pin" style="top: 30.2%; left: 55.3%;" title="SP">📍</a>
-            <a href="RF.html" class="pin" style="top: 33.6%; left: 71.9%;" title="RF">📍</a>
-            <a href="CC.html" class="pin" style="top: 46.8%; left: 14.3%;" title="CCW">🚠</a>
-            <a href="PP.html" class="pin" style="top: 47.7%; left: 88.4%;" title="PP">📍</a>
-            <a href="OT.html" class="pin" style="top: 39.2%; left: 82.3%;" title="OT">📍</a>
-            <a href="SM.html" class="pin" style="top: 16.6%; left: 85.4%;" title="SM">📍</a>
-            <a href="MMBRC.html" class="pin" style="top: 43.6%; left: 92.7%;" title="解剖研究中心">🔬</a>
-            <a href="thai.html" class="pin" style="top: 55.1%; left: 28.5%;" title="泰國菜">🍲</a>
-            <a href="penguin.html" class="pin" style="top: 34.7%; left: 46.0%;" title="冰極餐廳">🐧</a>
+            <a href="GA.html" class="pin" style="top: 64.5%; left: 43.6%;" title="GA">📍</a>
+            <a href="AAA.html" class="pin" style="top: 37.6%; left: 21.6%;" title="AAA">🐼</a>    
+            <a href="AIA.html" class="pin" style="top: 53.7%; left: 20.5%;" title="AIA">📍</a>
+            <a href="oldstreet.html" class="pin" style="top: 50.3%; left: 23.2%;" title="香港老大街">🇭🇰</a>
+            <a href="CC.html" class="pin" style="top: 59.4%; left: 14.3%;" title="纜車站">🚠</a>
+            <a href="thai.html" class="pin" style="top: 70.0%; left: 28.5%;" title="爐炭">🍲</a>
+        
+            <a href="ST.html" class="pin" style="top: 53.3%; left: 39.0%;" title="海洋劇場">🐬</a>
+            <a href="OE.html" class="pin" style="top: 49.7%; left: 32.7%;" title="高峰樂園站">🎡</a>
+            <a href="MTA.html" class="pin" style="top: 21.3%; left: 38.4%;" title="動感天地">🎢</a>
+            <a href="NP.html" class="pin" style="top: 42.2%; left: 49.3%;" title="北極之旅">🧊</a>
+            <a href="SP.html" class="pin" style="top: 38.4%; left: 55.3%;" title="南極奇珍">🐧</a>
+            <a href="RF.html" class="pin" style="top: 42.7%; left: 71.9%;" title="熱帶雨林">🌲</a>
+            <a href="PP.html" class="pin" style="top: 60.6%; left: 88.4%;" title="尋鯊探秘">🦈</a>
+            <a href="OT.html" class="pin" style="top: 49.8%; left: 82.3%;" title="海洋天地">📍</a>
+            <a href="SM.html" class="pin" style="top: 21.1%; left: 85.4%;" title="翻天覆地">🎢</a>
+            <a href="MMBRC.html" class="pin" style="top: 55.4%; left: 92.7%;" title="鯨豚研究中心">🔬</a>
+            <a href="penguin.html" class="pin" style="top: 44.0%; left: 46.0%;" title="冰極餐廳">🍴</a>
         </div>
 
         <div class="nav-grid">
