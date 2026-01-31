@@ -13,7 +13,6 @@
 
         body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif; background: #f0f2f5; }
 
-        /* 背景與容器 */
         .main-background {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-image) no-repeat center center;
@@ -27,76 +26,88 @@
             background: var(--overlay-color);
         }
 
+        /* 1. 標題並排設計 */
         header {
-            display: flex; /* 開啟並排模式 */
-            align-items: center; /* 垂直置中 */
-            justify-content: center; /* 水平置中 */
-            gap: 15px; /* Logo 與標題之間的間距 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             margin-bottom: 20px;
             width: 100%;
         }
-        
-        .logo-wrapper img {
-            height: 75px; /* 維持你滿意的 75px 高度 */
-            width: auto;
-            display: block;
-        }
+        .logo-wrapper img { height: 75px; width: auto; display: block; }
+        h1 { margin: 0; font-size: 24px; color: #333; }
 
-        h1 {
-            margin: 0;
-            font-size: 24px; /* 稍微縮小字體以配合並排 */
-            color: #333;
-        }
-
-        .park-map {
+        /* 2. 核心修正：讓地圖成為點位的座標參考 */
+        .map-wrapper {
+            position: relative; /* 這是防止點位跑掉的關鍵！ */
             width: 100%;
-            height: auto;
-            display: block;
+            max-width: 1000px;
+            line-height: 0;
+            border-radius: 15px;
+            overflow: visible; /* 為了顯示 Tooltip */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        /* 大頭針樣式 */
-        /* 圓點標籤樣式 */
+        .park-map { width: 100%; height: auto; display: block; border-radius: 15px; }
+
+        /* 3. 專業紅點與 Tooltip 設計 */
         .pin {
             position: absolute;
             width: 12px;
             height: 12px;
-            background-color: #ff3b30; /* 經典紅點 */
+            background-color: #ff3b30;
             border: 2px solid white;
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 8px rgba(0,0,0,0.3);
             cursor: pointer;
             z-index: 10;
         }
-        
-        /* 讓圓點有閃爍動畫，吸引注意力 */
-        .pin::after {
-            content: '';
+
+        /* 小方格 Tooltip */
+        .pin .tooltip {
+            visibility: hidden;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 6px;
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            border-radius: 50%;
-            background-color: #ff3b30;
-            opacity: 0.6;
-            animation: pulse 2s infinite;
+            bottom: 150%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        
+
+        /* 小箭頭 */
+        .pin .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+        }
+
+        .pin:hover .tooltip { visibility: visible; opacity: 1; }
+        .pin::after {
+            content: ''; position: absolute; width: 100%; height: 100%;
+            border-radius: 50%; background-color: #ff3b30; opacity: 0.6;
+            animation: pulse 2s infinite; top: 0; left: 0;
+        }
         @keyframes pulse {
             0% { transform: scale(1); opacity: 0.6; }
             100% { transform: scale(3); opacity: 0; }
         }
-        
-        /* 碰到的時候變色 */
-        .pin:hover {
-            background-color: #0077be;
-        }
 
-        /* 下方導航卡片 */
         .nav-grid {
             display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 12px; width: 100%; max-width: 500px;
+            gap: 12px; width: 100%; max-width: 500px; margin-top: 25px;
         }
         .nav-card {
             background: white; border-radius: 15px; padding: 15px;
@@ -108,9 +119,7 @@
     </style>
 </head>
 <body>
-
     <div class="main-background"></div>
-
     <div class="scroll-container">
         <header>
             <div class="logo-wrapper">
@@ -119,27 +128,29 @@
             <h1>海洋公園導覽建議</h1>
         </header>
 
-        <div class="map-wrapper">
+        <div class="map-wrapper" id="map-clicker">
             <img src="TC_GuideMap 2025_V2_POI V3.jpg" alt="Ocean Park Map" class="park-map">
+                
+            <a href="GA.html" class="pin" style="top: 53.2%; left: 37.4%;"><span class="tooltip">海洋奇觀<br>動物展館</span></a>
+            <a href="AAA.html" class="pin" style="top: 30.9%; left: 18.4%;"><span class="tooltip">亞洲動物天地<br>動物展館</span></a>
+            <a href="AIA.html" class="pin" style="top: 44.3%; left: 17.7%;"><span class="tooltip">樹懶與好友<br>動物展館</span></a>
+            <a href="oldstreet.html" class="pin" style="top: 41.3%; left: 19.8%;"><span class="tooltip">香港老大街<br>景點</span></a>
+            <a href="CC.html" class="pin" style="top: 49.1%; left: 12.3%;"><span class="tooltip">纜車站（夢幻水都）<br>園內交通</span></a>
+            <a href="CC.html" class="pin" style="top: 22.3%; left: 61.3%;"><span class="tooltip">纜車站（高峰樂園）<br>園內交通</span></a>
+            <a href="thai.html" class="pin" style="top: 57.7%; left: 24.4%;"><span class="tooltip">爐炭燒"<br>泰國餐廳</span></a>
         
-            <a href="GA.html" class="pin" style="top: 53.2%; left: 37.4%;" title="海洋奇觀"></a>
-            <a href="AAA.html" class="pin" style="top: 30.9%; left: 18.4%;" title="亞洲動物天地"></a>
-            <a href="AIA.html" class="pin" style="top: 44.3%; left: 17.7%;" title="樹懶與好友"></a>
-            <a href="oldstreet.html" class="pin" style="top: 41.3%; left: 19.8%;" title="香港老大街"></a>
-            <a href="CC.html" class="pin" style="top: 49.1%; left: 12.3%;" title="纜車站（夢幻水都）"></a>
-            <a href="thai.html" class="pin" style="top: 57.7%; left: 24.4%;" title="爐炭燒"></a>
-        
-            <a href="ST.html" class="pin" style="top: 43.9%; left: 33.3%;" title="四川奇珍館"></a>
-            <a href="OE.html" class="pin" style="top: 41.1%; left: 27.9%;" title="海洋列車"></a>
-            <a href="MTA.html" class="pin" style="top: 17.4%; left: 32.9%;" title="小狐獴與大象龜之旅"></a>
-            <a href="NP.html" class="pin" style="top: 34.5%; left: 42.7%;" title="北極之旅"></a>
-            <a href="SP.html" class="pin" style="top: 31.8%; left: 47.3%;" title="南極奇觀"></a>
-            <a href="RF.html" class="pin" style="top: 35.1%; left: 61.5%;" title="熱帶雨林"></a>
-            <a href="PP.html" class="pin" style="top: 49.8%; left: 75.8%;" title="太平洋海岸"></a>
-            <a href="OT.html" class="pin" style="top: 40.7%; left: 70.5%;" title="海豚探秘（海洋劇場）"></a>
-            <a href="SM.html" class="pin" style="top: 17.2%; left: 73.2%;" title="尋鯊探秘"></a>
-            <a href="MMBRC.html" class="pin" style="top: 45.6%; left: 79.5%;" title="海洋哺乳動物繁殖及研究中心"></a>
-            <a href="penguin.html" class="pin" style="top: 36.1%; left: 39.5%;" title="冰極餐廳"></a>
+            <a href="ST.html" class="pin" style="top: 43.9%; left: 33.3%;"><span class="tooltip">四川奇珍館<br>動物展館</span></a>
+            <a href="OE.html" class="pin" style="top: 41.1%; left: 27.9%;"><span class="tooltip">海洋列車（夢幻水都）<br>園內交通</span></a>
+            <a href="OE.html" class="pin" style="top: 52.1%; left: 50.6%;"><span class="tooltip">海洋列車（高峰樂園）<br>園內交通</span></a>
+            <a href="MTA.html" class="pin" style="top: 17.4%; left: 32.9%;"><span class="tooltip">小狐獴與大象龜之旅<br>動物展館</span></a>
+            <a href="NP.html" class="pin" style="top: 34.5%; left: 42.7%;"><span class="tooltip">北極之旅<br>動物展館</span></a>
+            <a href="SP.html" class="pin" style="top: 31.8%; left: 47.3%;"><span class="tooltip">南極奇觀<br>動物展館</span></a>
+            <a href="RF.html" class="pin" style="top: 35.1%; left: 61.5%;"><span class="tooltip">熱帶雨林<br>動物展館</span></a>
+            <a href="PP.html" class="pin" style="top: 49.8%; left: 75.8%;"><span class="tooltip">太平洋海岸<br>動物展館</span></a>
+            <a href="OT.html" class="pin" style="top: 40.7%; left: 70.5%;"><span class="tooltip">海豚探秘（海洋劇場）<br>動物展館</span></a>
+            <a href="SM.html" class="pin" style="top: 17.2%; left: 73.2%;"><span class="tooltip">尋鯊探秘<br>動物展館</span></a>
+            <a href="MMBRC.html" class="pin" style="top: 45.6%; left: 79.5%;"><span class="tooltip">海洋哺乳動物繁殖及研究中心<br>動物展館</span></a>
+            <a href="penguin.html" class="pin" style="top: 36.1%; left: 39.5%;"><span class="tooltip">冰極餐廳<br>西式餐廳</span></a>
         </div>
 
         <div class="nav-grid">
@@ -148,5 +159,13 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById('map-clicker').addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            console.log(`style="top: ${y.toFixed(1)}%; left: ${x.toFixed(1)}%;"`);
+        });
+    </script>
 </body>
 </html>
