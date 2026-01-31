@@ -21,43 +21,34 @@
 
         .scroll-container {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            /* 核心修正：改為 flex-start，避免 center 導致滑動時計算偏移 */
-            align-items: flex-start; 
-            padding: 20px;
-            box-sizing: border-box;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 20px; box-sizing: border-box;
             background: var(--overlay-color);
-            width: 100%;
         }
-        
-        /* 確保 Header 與 Nav 在左對齊模式下依然置中 */
-        header, .nav-grid {
-            align-self: center;
+
+        header {
+            display: flex; align-items: center; justify-content: center;
+            gap: 15px; margin-bottom: 25px; width: 100%;
         }
-        
-        /* 2. 強制地圖容器保持固定比例 */
+        .logo-wrapper img { height: 60px; width: auto; }
+        h1 { margin: 0; font-size: 22px; color: #333; }
+
+        /* 關鍵修正：地圖容器適應螢幕，不產生捲軸 */
         .map-wrapper {
             position: relative;
-            width: 100%; /* 在桌機版隨容器 */
-            max-width: 1000px;
-            margin: 20px auto;
-            overflow-x: auto; /* 核心：允許橫向捲動 */
-            overflow-y: hidden;
-            -webkit-overflow-scrolling: touch; 
+            width: 100%; 
+            max-width: 800px; /* 在桌面模式下限制最大寬度 */
+            margin: 0 auto;
             border-radius: 15px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-            /* 防止 Flexbox 壓縮 */
-            flex-shrink: 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            line-height: 0; /* 消除圖片下方的間隙 */
         }
-        
-        /* 3. 關鍵：讓圖片在手機上「撐開」，點位才會釘死在 1000px 的參考系上 */
+
         .park-map {
-            width: 1000px !important; /* 強制寬度 */
-            min-width: 1000px !important;
+            width: 100%; /* 地圖隨容器寬度自動縮放 */
             height: auto;
-            display: block;
             border-radius: 15px;
+            display: block;
         }
         /* 3. 專業紅點與 Tooltip 設計 */
         /* 修改後的紅點樣式 */
