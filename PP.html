@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+         :root {
+            --bg-image: url('TC_GuideMap 2025_V2_POI V3.jpg');
+            --overlay-color: rgba(255, 255, 255, 0.8);
+            --accent-color: #0077be;
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif }
+
+        .main-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-image) no-repeat center center;
+            background-size: cover; z-index: -1;
+        }
+
+        .scroll-container {
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 20px; box-sizing: border-box;
+            background: var(--overlay-color);
+        }
+
+        body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fdfdfd; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 25px; }
+        .back-link { text-decoration: none; color: #0077be; font-weight: bold; display: block; margin-bottom: 20px; }
+        
+        /* 展館標題區 */
+        .hero-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h1 { margin: 0 0 10px 0; color: #222; font-size: 26px; }
+        .tag { background: #e1f5fe; color: #0077be; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+
+        /* 章節標題 */
+        h2 { font-size: 18px; border-left: 4px solid #0077be; padding-left: 10px; margin-top: 30px; }
+
+        /* 按鈕群組容器 */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 一行兩個，平均分配寬度 */
+            gap: 10px; /* 按鈕之間的間距 */
+            margin: 15px 0;
+        }
+        
+        /* 稍微調整按鈕樣式，讓它在並排時不會太擠 */
+        .animal-btn {
+            display: flex;
+            flex-direction: column; /* 讓中英文垂直排列 */
+            align-items: center;    /* 水平置中 */
+            justify-content: center; /* 垂直置中 */
+            text-align: center;
+            padding: 10px 5px;
+            background: #fff;
+            border: 2px solid #0077be;
+            color: #0077be;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            
+            /* 核心修正：強制不換行，即使有空格也不拆 */
+            white-space: nowrap; 
+            
+            /* 根據按鈕寬度自動縮小字體 (選用) */
+            font-size: 15px; 
+            line-height: 1.4;
+        }
+        
+        /* 針對英文部分，稍微縮小字體以防溢出 */
+        .animal-btn .en-text {
+            font-size: 15px;
+            font-weight: normal;
+            display: block; /* 確保佔據獨立一行 */
+            margin-top: 2px;
+        }
+        
+        .animal-btn:hover {
+            background: #0077be;
+            color: #fff;
+        }
+
+        /* 員工小貼士 */
+        .pro-tips {
+            background: #e1f5fe; border-radius: 15px; padding: 20px; margin-top: 30px;
+            position: relative; overflow: hidden;
+        }
+        .pro-tips::before { content: '💡'; position: absolute; right: 10px; bottom: -5px; font-size: 50px; opacity: 0.1; }
+        .pro-tips h3 { margin-top: 0; font-size: 16px; color: #0077be; }
+    </style>
+</head>
+<body>
+    <div class="main-background"></div>
+
+    <div class="scroll-container">
+        <div class="container">
+            <a href="index.html" class="back-link">← 返回地圖</a>
+
+            <div class="hero-section">
+                <span class="tag">展館介紹</span>
+                <h1>太平洋海岸 Pacific Ocean</h1>
+                <p>陽光明媚，猶如漫步美國加州<br>
+                與可愛的海獅跟海豹見面<br>
+                甚至有機會親手餵飼牠們</p>
+            </div>
+
+            <h2>🐾 動物介紹</h2>
+            <p>想了解更多關於這裡的明星動物嗎？點擊下方查看官方詳細介紹：</p>
+            <div class="button-group">
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/giant-grouper" class="animal-btn" target="_blank">花尾龍躉<span class="en-text">Giant Grouper</span>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/milkfish" class="animal-btn" target="_blank">牛奶魚<span class="en-text">Milkfish</a>        
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/manta-ray" class="animal-btn" target="_blank">角鵬<span class="en-text">Manta Ray</a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/napoleon-fish" class="animal-btn" target="_blank">蘇眉<span class="en-text">Napoleon Fish</a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/yellow-seahorse%20" class="animal-btn" target="_blank">黃海馬<span class="en-text">Yellow Seahorse</a>
+            </div>
+
+            <h2>👨‍🔬 小知識</h2>
+            <div class="pro-tips">
+                <h3>個人分享</h3>
+                <p>入口進去的第一個小魚缸養了<strong>真的珊瑚</strong>。之後會經過一個有海星和海參的池子，以前是一個觸摸池。但是，因為遊客在體驗的時候經常出現不受控的情況，加上需要投入大量人手維持秩序，因此最後結束了觸摸體驗。</p>
+                <p>我們有一隻角鵬，牠的名字叫<strong>紀子</strong>，可是牠是男生喔。</p>
+                <p>面對巨型觀賞屏是我們的海龍王餐廳，這是一家<strong>有提供海鮮料理</strong>的中式餐廳</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
