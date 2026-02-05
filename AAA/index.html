@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+         :root {
+            --bg-image: url('../TC_GuideMap 2025_V2_POI V3.jpg');
+            --overlay-color: rgba(255, 255, 255, 0.8);
+            --accent-color: #0077be;
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif }
+
+        .main-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-image) no-repeat center center;
+            background-size: cover; z-index: -1;
+        }
+
+        .scroll-container {
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 20px; box-sizing: border-box;
+            background: var(--overlay-color);
+        }
+
+        body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fdfdfd; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 25px; }
+        .back-link { text-decoration: none; color: #0077be; font-weight: bold; display: block; margin-bottom: 20px; }
+        
+        /* 展館標題區 */
+        .hero-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h1 { margin: 0 0 10px 0; color: #222; font-size: 26px; }
+        .tag { background: #e1f5fe; color: #0077be; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+
+        /* 章節標題 */
+        h2 { font-size: 18px; border-left: 4px solid #0077be; padding-left: 10px; margin-top: 30px; }
+
+        /* 按鈕群組容器 */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 一行兩個，平均分配寬度 */
+            gap: 10px; /* 按鈕之間的間距 */
+            margin: 15px 0;
+        }
+        
+        /* 稍微調整按鈕樣式，讓它在並排時不會太擠 */
+        .animal-btn {
+            display: flex;
+            flex-direction: column; /* 讓中英文垂直排列 */
+            align-items: center;    /* 水平置中 */
+            justify-content: center; /* 垂直置中 */
+            text-align: center;
+            padding: 10px 5px;
+            background: #fff;
+            border: 2px solid #0077be;
+            color: #0077be;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            
+            /* 核心修正：強制不換行，即使有空格也不拆 */
+            white-space: nowrap; 
+            
+            /* 根據按鈕寬度自動縮小字體 (選用) */
+            font-size: 15px; 
+            line-height: 1.4;
+        }
+        
+        /* 針對英文部分，稍微縮小字體以防溢出 */
+        .animal-btn .en-text {
+            font-size: 15px;
+            font-weight: normal;
+            display: block; /* 確保佔據獨立一行 */
+            margin-top: 2px;
+        }
+        
+        .animal-btn:hover {
+            background: #0077be;
+            color: #fff;
+        }
+
+        /* 員工小貼士 */
+        .pro-tips {
+            background: #e1f5fe; border-radius: 15px; padding: 20px; margin-top: 30px;
+            position: relative; overflow: hidden;
+        }
+        .pro-tips::before { content: '💡'; position: absolute; right: 10px; bottom: -5px; font-size: 50px; opacity: 0.1; }
+        .pro-tips h3 { margin-top: 0; font-size: 16px; color: #0077be; }
+    </style>
+</head>
+<body>
+    <div class="main-background"></div>
+
+    <div class="scroll-container">
+        <div class="container">
+            <a href="../" class="back-link">← 返回地圖</a>
+
+            <div class="hero-section">
+                <span class="tag">展館介紹</span>
+                <h1>亞洲動物天地 Amazing Asian Animals</h1>
+                <p>🐼 由多個部分組成，包括鱷魚潭、大熊貓之旅、熊貓山莊和本地河溪生態館<br>
+                🐊 探訪大熊貓前，可先到位於入口處的鱷魚潭尋找揚子鱷，探訪完畢也可以一看亞洲體型最小的小爪水獺<br>
+                🏞️ 本地河溪生態館帶你認識本地淡水物種、河岸動植物，更會介紹本地淡水生態環境中常見的外來入侵物種</p>
+            </div>
+
+            <h2>🐾 動物介紹</h2>
+            <p>想了解更多關於這裡的明星動物嗎？點擊下方查看官方詳細介紹：</p>
+            <div class="button-group">
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/asian-small-clawed-otter" class="animal-btn" target="_blank">小爪水獺<span class="en-text">Asian Small Clawed Otter</span></a> 
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/chinese-alligator%20" class="animal-btn" target="_blank">揚子鱷<span class="en-text">Chinese Alligator</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/chinese-giant-salamander" class="animal-btn" target="_blank">大鯢<span class="en-text">Chinese Giant Salamander</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/chinese-stripe-necked-turtle" class="animal-btn" target="_blank">中華花龜<span class="en-text">Chinese Stripe-necked Turtle</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/Education-conservation/conservation/animal-and-plant-guide/giant-panda" class="animal-btn" target="_blank">大熊貓<span class="en-text">Giant Panda</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/hong-kong-newt%20%20" class="animal-btn" target="_blank">香港瘰螈<span class="en-text">Hong Kong Newt</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/Education-conservation/conservation/animal-and-plant-guide/red-panda" class="animal-btn" target="_blank">小熊貓<span class="en-text">Red Panda</span></a>
+                
+            </div>
+
+            <h2>👨‍🔬 小知識</h2>
+            <div class="pro-tips">
+                <h3>趣事分享</h3>
+                <p>由於大鯢經常一整天都<strong>動也不動</strong>，所以很多遊客都會問牠們是真的還是假的，甚至根本就沒有留意得到牠們的存在。所以，如果有經過的話，<strong>看牠們一眼</strong>吧。</p>
+                <p>很常會聽到家長跟小孩說大熊貓的小時候就是小熊貓。不！小熊貓長大後只會是<strong>大的小熊貓</strong>，牠們<strong>不會</strong>變成大熊貓！</p>
+                <p>雖然展館裡面有一個飼養中華花龜的開放空間，而且裡面有很多硬幣，但是<strong>不要再扔硬幣</strong>了。這樣許願是不會靈光的。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
