@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+         :root {
+            --bg-image: url('../TC_GuideMap 2025_V2_POI V3.jpg');
+            --overlay-color: rgba(255, 255, 255, 0.8);
+            --accent-color: #0077be;
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif }
+
+        .main-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-image) no-repeat center center;
+            background-size: cover; z-index: -1;
+        }
+
+        .scroll-container {
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 20px; box-sizing: border-box;
+            background: var(--overlay-color);
+        }
+
+        body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fdfdfd; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 25px; }
+        .back-link { text-decoration: none; color: #0077be; font-weight: bold; display: block; margin-bottom: 20px; }
+        
+        /* 展館標題區 */
+        .hero-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h1 { margin: 0 0 10px 0; color: #222; font-size: 26px; }
+        .tag { background: #e1f5fe; color: #0077be; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+
+        /* 章節標題 */
+        h2 { font-size: 18px; border-left: 4px solid #0077be; padding-left: 10px; margin-top: 30px; }
+
+        /* 按鈕群組容器 */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 一行兩個，平均分配寬度 */
+            gap: 10px; /* 按鈕之間的間距 */
+            margin: 15px 0;
+        }
+        
+        /* 稍微調整按鈕樣式，讓它在並排時不會太擠 */
+        .animal-btn {
+            display: flex;
+            flex-direction: column; /* 讓中英文垂直排列 */
+            align-items: center;    /* 水平置中 */
+            justify-content: center; /* 垂直置中 */
+            text-align: center;
+            padding: 10px 5px;
+            background: #fff;
+            border: 2px solid #0077be;
+            color: #0077be;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            
+            /* 核心修正：強制不換行，即使有空格也不拆 */
+            white-space: nowrap; 
+            
+            /* 根據按鈕寬度自動縮小字體 (選用) */
+            font-size: 15px; 
+            line-height: 1.4;
+        }
+        
+        /* 針對英文部分，稍微縮小字體以防溢出 */
+        .animal-btn .en-text {
+            font-size: 15px;
+            font-weight: normal;
+            display: block; /* 確保佔據獨立一行 */
+            margin-top: 2px;
+        }
+        
+        .animal-btn:hover {
+            background: #0077be;
+            color: #fff;
+        }
+
+        /* 員工小貼士 */
+        .pro-tips {
+            background: #e1f5fe; border-radius: 15px; padding: 20px; margin-top: 30px;
+            position: relative; overflow: hidden;
+        }
+        .pro-tips::before { content: '💡'; position: absolute; right: 10px; bottom: -5px; font-size: 50px; opacity: 0.1; }
+        .pro-tips h3 { margin-top: 0; font-size: 16px; color: #0077be; }
+    </style>
+</head>
+<body>
+    <div class="main-background"></div>
+
+    <div class="scroll-container">
+        <div class="container">
+            <a href="../" class="back-link">← 返回地圖</a>
+
+            <div class="hero-section">
+                <span class="tag">展館介紹</span>
+                <h1>熱帶雨林探險徑<br>Expedition Trail</h1>
+                <p>🐍 在熱帶雨林中與各種珍稀動物相遇，從兩棲爬蟲、昆蟲，到鳥類和哺乳類動物，應有盡有<br>
+                🐒 你會找到人稱淡水魚巨無霸的海象魚，也會找到只有拳頭那麼大的侏狨<br>
+                🦜 在探險徑入口的卡車上，有機會可以超級近距離欣賞金剛鸚鵡</p>
+            </div>
+
+            <h2>🐾 動物介紹</h2>
+            <p>想了解更多關於這裡的明星動物嗎？點擊下方查看官方詳細介紹：</p>
+            <div class="button-group">
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/arapaima" class="animal-btn" target="_blank">海象魚<span class="en-text">Arapaima</span></a> 
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/electric-eel%20" class="animal-btn" target="_blank">電鰻<span class="en-text">Electric Eel</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/green-anaconda%20%20" class="animal-btn" target="_blank">森蚺<span class="en-text">Green Anaconda</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/kinkajou" class="animal-btn" target="_blank">蜜熊<span class="en-text">Kinkajou</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/macaws" class="animal-btn" target="_blank">金剛鸚鵡<span class="en-text">Macaw</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/nicobar-pigeon" class="animal-btn" target="_blank">尼柯巴鳩<span class="en-text">Nicobar Pigeon</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/poison-dart-frogs" class="animal-btn" target="_blank">毒箭蛙<span class="en-text">Poison Dart Frogs</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/pygmy-marmoset" class="animal-btn" target="_blank">侏狨<span class="en-text">Pygmy Marmoset</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/red-bellied-piranha" class="animal-btn" target="_blank">紅肚食人鯧<span class="en-text">Red Bellied Piranha</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/red-handed-tamarin" class="animal-btn" target="_blank">赤掌獠狨<span class="en-text">Red-handed Tamarin</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/tarantulas" class="animal-btn" target="_blank">毛蛛<span class="en-text">Tarantulas</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/toco-toucan%20" class="animal-btn" target="_blank">托哥巨嘴鳥<span class="en-text">Toco Toucan</span></a>
+                
+            </div>
+
+            <h2>👨‍🔬 小知識</h2>
+            <div class="pro-tips">
+                <h3>趣事分享</h3>
+                <p>風太大的時候，卡車上面的金剛鸚鵡會<strong>站不穩</strong>。如果看到從卡車上掉下來的金剛鸚鵡，千萬<strong>不要觸碰牠們</strong>喔。</p>
+                <p>赤掌獠狨住在橋下的空間，進入室內展場前記得要<strong>低頭往下看</strong>，不然會錯過了牠們。</p>
+                <p>如果你喜歡奇珍異獸，那麼就一定要去看看<strong>秘魯巨人蟑螂</strong>。長這麼大的蟑螂其實也蠻可愛的。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
