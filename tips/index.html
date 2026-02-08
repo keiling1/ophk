@@ -143,31 +143,30 @@
         .tips-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px; /* 稍微縮小間距，讓卡片本體更寬 */
+            gap: 15px;
             width: 100%;
+            /* 核心：確保容器不會因為內容而變寬 */
+            table-layout: fixed; 
         }
         
         /* 響應式修正：當螢幕寬度小於 600px (手機) 時，變回一列一個 */
         @media (max-width: 600px) {
             .tips-grid {
-                grid-template-columns: 1fr;
-            }
-            .container {
-                padding: 10px; /* 手機端縮小邊距，讓卡片更寬 */
+                grid-template-columns: 1fr; /* 手機上一行一個，依然維持 100% 寬度 */
             }
         }
         
         /* 摺疊卡片樣式優化 */
         .hero-section.collapsible {
-            width: 100%;
-            max-width: 1000px; /* 這裡確保跟地圖寬度一致 */
-            margin: 15px 0;
-            padding: 0 !important; /* 讓內部的 summary 控制間距 */
-            border: 2px solid #0077be; /* 模仿按鈕的邊框感 */
+            width: 100%; /* 強制填滿 Grid 的 1fr */
+            box-sizing: border-box; /* 確保 border 不會撐開寬度 */
+            margin: 0;
+            padding: 0 !important;
+            border: 2px solid #0077be;
             background: white;
             border-radius: 15px;
-            box-sizing: border-box;
-            overflow: hidden;
+            overflow: hidden; /* 防止內容溢出撐開寬度 */
+            display: block; /* 避免某些瀏覽器將 details 當作 inline 處理 */
         }
         
         summary {
@@ -196,6 +195,11 @@
         /* 3. 當滑鼠懸停或點擊時，模擬按鈕的反饋感 */
         summary:hover {
             background-color: #f0faff;
+        }
+
+        summary, .collapsible .content {
+            width: 100%;
+            box-sizing: border-box; /* 關鍵：Padding 往內縮，不往外撐 */
         }
     </style>
 </head>
