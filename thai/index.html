@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+         :root {
+            --bg-image: url('../TC_GuideMap 2025_V2_POI V3.jpg');
+            --overlay-color: rgba(255, 255, 255, 0.8);
+            --accent-color: #0077be;
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif }
+
+        .main-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-image) no-repeat center center;
+            background-size: cover; z-index: -1;
+        }
+
+        .scroll-container {
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 20px; box-sizing: border-box;
+            background: var(--overlay-color);
+        }
+
+        body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fdfdfd; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 25px; }
+        .back-link { text-decoration: none; color: #0077be; font-weight: bold; display: block; margin-bottom: 20px; }
+        
+        /* 展館標題區 */
+        .hero-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h1 { margin: 0 0 10px 0; color: #222; font-size: 26px; }
+        .tag { background: #e1f5fe; color: #0077be; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+
+        /* 章節標題 */
+        h2 { font-size: 18px; border-left: 4px solid #0077be; padding-left: 10px; margin-top: 30px; }
+
+        /* 按鈕群組容器 */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 一行兩個，平均分配寬度 */
+            gap: 10px; /* 按鈕之間的間距 */
+            margin: 15px 0;
+        }
+        
+        /* 稍微調整按鈕樣式，讓它在並排時不會太擠 */
+        .animal-btn {
+            display: flex;
+            flex-direction: column; /* 讓中英文垂直排列 */
+            align-items: center;    /* 水平置中 */
+            justify-content: center; /* 垂直置中 */
+            text-align: center;
+            padding: 10px 5px;
+            background: #fff;
+            border: 2px solid #0077be;
+            color: #0077be;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            
+            /* 核心修正：強制不換行，即使有空格也不拆 */
+            white-space: nowrap; 
+            
+            /* 根據按鈕寬度自動縮小字體 (選用) */
+            font-size: 15px; 
+            line-height: 1.4;
+        }
+        
+        /* 針對英文部分，稍微縮小字體以防溢出 */
+        .animal-btn .en-text {
+            font-size: 15px;
+            font-weight: normal;
+            display: block; /* 確保佔據獨立一行 */
+            margin-top: 2px;
+        }
+        
+        .animal-btn:hover {
+            background: #0077be;
+            color: #fff;
+        }
+
+        /* 員工小貼士 */
+        .pro-tips {
+            background: #e1f5fe; border-radius: 15px; padding: 20px; margin-top: 30px;
+            position: relative; overflow: hidden;
+        }
+        .pro-tips::before { content: '💡'; position: absolute; right: 10px; bottom: -5px; font-size: 50px; opacity: 0.1; }
+        .pro-tips h3 { margin-top: 0; font-size: 16px; color: #0077be; }
+    </style>
+</head>
+<body>
+    <div class="main-background"></div>
+
+    <div class="scroll-container">
+        <div class="container">
+            <a href="../" class="back-link">← 返回地圖</a>
+
+            <div class="hero-section">
+                <span class="tag">展館介紹</span>
+                <h1>爐炭燒 Ginger Grill</h1>
+                <p>🔥 以「備長炭」為燃料，明火炭燒爐即席烤制各種美味食材<br>
+                🍹 以熱帶風情為設計主題<br>
+                🇹🇭 以薑及其它泰國地道香料調製醬汁</p>
+            </div>
+
+            <h2>🔗 實用連結</h2>
+            <p>想了解更多關於爐炭燒嗎？點擊下方查看：</p>
+            <div class="button-group">
+                <a href="https://bookonline.foodcloud.hk/m6104/b0001/tms/zh_tw/reserve/create/DGG/0ec50e4432e5b6d527cc613ae959e3f4" class="animal-btn" target="_blank">訂座<span class="en-text">Reservation</span>
+                <a href="https://media.oceanpark.com.hk/files/s3fs-public/gg-alacarte-menu.pdf" class="animal-btn" target="_blank">單點菜單<span class="en-text">À la carte</a>        
+                <a href="https://media.oceanpark.com.hk/files/s3fs-public/gg-lunch-set-menu.pdf" class="animal-btn" target="_blank">午市套餐<span class="en-text">Lunch Set</a>
+                <a href="https://www.oceanpark.com.hk/tc/experience/dining-and-shopping/restaurants/ginger-grill" class="animal-btn" target="_blank">了解更多<span class="en-text">More Information</a>
+
+            </div>
+
+            <h2>👨‍🔬 小知識</h2>
+            <div class="pro-tips">
+                <h3>趣事分享</h3>
+                <p>個人認為是主題樂園<strong>難得一見</strong>的好餐廳！</p>
+                <p>很常下班後會在這裡<strong>團隊聚餐</strong>，食物確實是好吃，而且使用<strong>員工優惠</strong>的時候會<strong>很划算</strong>。</p>
+                <p>離開海洋公園的出口很近，所以離園前在這裡<strong>晚餐</strong>剛剛好。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
