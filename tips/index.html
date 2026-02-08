@@ -142,31 +142,39 @@
         /* 攻略容器：設定為網格佈局 */
         .tips-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr; /* 強制設定兩欄，每欄各佔 50% */
             gap: 15px;
             width: 100%;
-            /* 核心：確保容器不會因為內容而變寬 */
-            table-layout: fixed; 
+            max-width: 600px; /* 跟你的主容器一致 */
+            margin: 20px auto;
+            /* 關鍵：防止內容撐開寬度 */
+            grid-auto-flow: row;
         }
         
         /* 響應式修正：當螢幕寬度小於 600px (手機) 時，變回一列一個 */
         @media (max-width: 600px) {
             .tips-grid {
-                grid-template-columns: 1fr; /* 手機上一行一個，依然維持 100% 寬度 */
+                grid-template-columns: 1fr; /* 改為一欄 */
             }
         }
         
         /* 摺疊卡片樣式優化 */
         .hero-section.collapsible {
-            width: 100%; /* 強制填滿 Grid 的 1fr */
-            box-sizing: border-box; /* 確保 border 不會撐開寬度 */
+            width: 100%; 
+            max-width: 100%; /* 防止任何內容撐出 100% */
+            box-sizing: border-box; /* Padding 往內計算 */
+            display: block; 
             margin: 0;
-            padding: 0 !important;
             border: 2px solid #0077be;
             background: white;
             border-radius: 15px;
-            overflow: hidden; /* 防止內容溢出撐開寬度 */
-            display: block; /* 避免某些瀏覽器將 details 當作 inline 處理 */
+            overflow: hidden; /* 核心：隱藏任何可能撐開寬度的內容 */
+        }
+
+        .collapsible .content p {
+            margin: 0;
+            word-break: break-word; /* 關鍵：如果單字太長，強制斷行而非撐開框框 */
+            white-space: normal;   /* 允許正常換行 */
         }
         
         summary {
@@ -199,7 +207,9 @@
 
         summary, .collapsible .content {
             width: 100%;
-            box-sizing: border-box; /* 關鍵：Padding 往內縮，不往外撐 */
+            max-width: 100%;
+            box-sizing: border-box;
+            display: block; /* 確保佔滿寬度 */
         }
     </style>
 </head>
