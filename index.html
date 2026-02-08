@@ -169,7 +169,7 @@
 
         .nav-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             width: 100%;
             max-width: 600px;
@@ -181,11 +181,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             display: flex; flex-direction: column; align-items: center;
             font-size: 16px; font-weight: bold;
-        }
-        @media (max-width: 600px) {
-            .nav-card {
-                grid-template-columns: 1fr; /* 手機上一行一個，依然維持 100% 寬度 */
-            }
         }
     </style>
 </head>
