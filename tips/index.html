@@ -89,8 +89,60 @@
         }
         .pro-tips::before { content: '💡'; position: absolute; right: 10px; bottom: -5px; font-size: 50px; opacity: 0.1; }
         .pro-tips h3 { margin-top: 0; font-size: 16px; color: #0077be; }
+
+        /* 1. 摺疊卡片外框：增加呼吸感 */
+        .hero-section.collapsible {
+            padding: 0; /* 讓內容控制 padding */
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin-bottom: 25px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* 2. 點擊標題區：改為橫向排列，箭頭放最右邊 */
+        summary {
+            display: flex;
+            justify-content: space-between; /* 關鍵：標題在左，箭頭在右 */
+            align-items: center;
+            padding: 25px;
+            cursor: pointer;
+            list-style: none; /* 移除預設黑點 */
+        }
+        summary::-webkit-details-marker { display: none; }
+        
+        /* 3. 箭頭樣式：更輕盈 */
+        .chevron {
+            font-size: 18px;
+            color: #0077be;
+            transition: transform 0.3s ease;
+            font-weight: 300;
+        }
+        
+        details[open] .chevron {
+            transform: rotate(180deg);
+        }
+        
+        /* 4. 內容區：增加左側裝飾線與淡入動畫 */
+        .collapsible .content {
+            padding: 0 25px 25px 25px;
+            margin-top: -10px;
+            color: #555;
+            font-size: 15px;
+            line-height: 1.8;
+            animation: slideDown 0.4s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
+
+
+    
 <body>
     <div class="main-background"></div>
 
@@ -98,6 +150,21 @@
         <div class="container">
             <a href="../" class="back-link">← 返回地圖</a>
 
+            <!-- <details class="hero-section collapsible" open>
+                <summary>
+                    <div class="summary-header">
+                        <span class="tag" style="background: #e3f2fd; color: #0077be; margin-bottom: 8px;">💡 最佳時機</span>
+                        <h1 style="margin: 0; font-size: 22px;">入園第一站：大熊貓之旅</h1>
+                    </div>
+                    <span class="chevron">▼</span>
+                </summary>
+                <div class="content">
+                    <p>為了有機會看到活躍的大熊貓小孩，建議第一站先到<strong>亞洲動物天地</strong>。
+                    身為在地研究者，我觀察到熊貓在早上的活動量通常最高。
+                    如果沒遇到睡醒的牠們，別灰心，下午再來一次挑戰！</p>
+                </div>
+            </details> -->
+            
             <details class="hero-section collapsible">
                 <summary>
                     <div class="summary-header">
