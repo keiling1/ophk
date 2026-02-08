@@ -32,7 +32,13 @@
         /* 展館標題區 */
         .hero-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
         h1 { margin: 0 0 10px 0; color: #222; font-size: 26px; }
-        .tag { background: #e1f5fe; color: #0077be; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+        .tag {
+            display: inline-block;
+            max-width: 90%; /* 防止標籤太長 */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; /* 萬一太長就顯示 ... */
+        }
 
         /* 章節標題 */
         h2 { font-size: 18px; border-left: 4px solid #0077be; padding-left: 10px; margin-top: 30px; }
@@ -114,9 +120,12 @@
         
         /* 3. 箭頭樣式：更輕盈 */
         .chevron {
-            flex-shrink: 0; /* 強制箭頭「不准縮小」也不准被擠走 */
-            font-size: 14px;
+            flex-shrink: 0; /* 禁止縮小 */
+            width: 40px; /* 給箭頭一個固定的寬度空間 */
+            text-align: center;
             color: #0077be;
+            font-size: 14px;
+            padding-right: 15px; /* 讓箭頭離邊緣有一點點距離 */
         }
         
         details[open] .chevron {
@@ -176,22 +185,20 @@
         }
         
         summary {
-            display: flex;
-            justify-content: space-between; /* 確保標題在左，箭頭在右 */
+            display: flex !important;
+            justify-content: space-between; /* 關鍵：左側標題與右側箭頭分開 */
             align-items: center;
-            padding: 15px;
+            padding: 0; /* 移除預設內距，改由內部元素控制 */
             width: 100% !important;
-            box-sizing: border-box;
             cursor: pointer;
+            list-style: none;
         }
+        summary::-webkit-details-marker { display: none; }
 
         .summary-header {
-            display: flex;
-            flex-direction: column;
-            /* 讓標題區塊不要撐開，留空間給箭頭 */
-            flex: 1; 
-            min-width: 0; 
-            padding-right: 10px; /* 與箭頭保持距離 */
+            flex: 1; /* 自動吃掉左側剩餘空間 */
+            min-width: 0; /* 允許文字在空間不足時換行，而不是撐開 */
+            padding: 20px; /* 在這裡設定內距 */
         }
         
         .summary-header h1 {
