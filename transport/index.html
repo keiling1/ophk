@@ -32,7 +32,13 @@
         /* 展館標題區 */
         .hero-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
         h1 { margin: 0 0 10px 0; color: #222; font-size: 26px; }
-        .tag { background: #e1f5fe; color: #0077be; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+        .tag {background: #e1f5fe; color: #0077be; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: bold;
+            display: inline-block;
+            max-width: 90%; /* 防止標籤太長 */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; /* 萬一太長就顯示 ... */
+        }
 
         /* 章節標題 */
         h2 { font-size: 18px; border-left: 4px solid #0077be; padding-left: 10px; margin-top: 30px; }
@@ -114,10 +120,12 @@
         
         /* 3. 箭頭樣式：更輕盈 */
         .chevron {
-            font-size: 18px;
+            flex-shrink: 0; /* 禁止縮小 */
+            width: 40px; /* 給箭頭一個固定的寬度空間 */
+            text-align: center;
             color: #0077be;
-            transition: transform 0.3s ease;
-            font-weight: 300;
+            font-size: 14px;
+            padding-right: 15px; /* 讓箭頭離邊緣有一點點距離 */
         }
         
         details[open] .chevron {
@@ -142,10 +150,10 @@
         /* 攻略容器：設定為網格佈局 */
         .tips-grid {
             display: grid;
-            grid-template-columns: repeat(1, 1fr); /* 一列兩個，平均分配寬度 */
+            grid-template-columns: repeat(2, 1fr); /* 一列兩個，平均分配寬度 */
             gap: 20px; /* 卡片之間的間距 */
             width: 100%;
-            max-width: 1000px; /* 配合你主地圖的寬度 */
+            max-width: 600px; /* 配合你主地圖的寬度 */
             margin: 20px auto;
         }
         
@@ -161,18 +169,61 @@
         
         /* 摺疊卡片樣式優化 */
         .hero-section.collapsible {
-            width: 100%;
-            margin-bottom: 0;
-            box-sizing: border-box;
-            border: 2px solid #e1f5fe; /* 增加邊框感，呼應動物按鈕設計 */
+            width: 297px !important; 
+            min-width: 297px !important;
+            max-width: 297px !important;
+            min-height: 80px; /* 設定一個較小的最小高度 */
+            margin-bottom: 10px;
+            /* 核心：鎖定盒子模型，不讓 padding 或 border 增加寬度 */
+            box-sizing: border-box; 
+            
+            margin: 0;
+            padding: 0 !important;
+            border: 2px solid #e1f5fe;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
         }
         
         summary {
-            padding: 15px 20px; /* 稍微縮小內邊距以適應並排 */
+            display: flex !important;
+            justify-content: space-between;
+            align-items: center;
+            /* 原本可能是 25px，現在改為上下 10px */
+            padding: 10px 15px !important; 
+            cursor: pointer;
+            width: 100% !important;
+            box-sizing: border-box;
+        }
+        summary::-webkit-details-marker { display: none; }
+
+        .summary-header {
+            flex: 1; /* 自動吃掉左側剩餘空間 */
+            min-width: 0; /* 允許文字在空間不足時換行，而不是撐開 */
+            padding: 20px; /* 在這裡設定內距 */
         }
         
         .summary-header h1 {
-            font-size: 18px; /* 縮小標題字體，避免兩欄時文字溢出 */
+            font-size: 18px; /* 稍微調小一點點，適合 295px 的寬度 */
+            margin: 5px 0 0 0;
+            line-height: 1.3;
+            word-wrap: break-word;
+            white-space: normal; /* 允許換行，不要橫向發展 */
+        }
+
+        summary, .collapsible .content {
+            width: 297px !important;
+            min-width: 297px !important;
+            max-width: 297px !important;
+            box-sizing: border-box;
+            padding: 20px;
+            display: block;
+        }
+
+        .collapsible .content p {
+            width: 100%;
+            word-break: break-all;
+            white-space: normal;
         }
     </style>
 </head>
