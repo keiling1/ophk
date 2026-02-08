@@ -26,7 +26,7 @@
         }
 
         body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fdfdfd; margin: 0; padding: 0; }
-        .container { max-width: 600px; margin: 0 auto; padding: 25px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 25px; }
         .back-link { text-decoration: none; color: #0077be; font-weight: bold; display: block; margin-bottom: 20px; }
         
         /* 展館標題區 */
@@ -142,11 +142,9 @@
         /* 攻略容器：設定為網格佈局 */
         .tips-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 一列兩個，平均分配寬度 */
-            gap: 20px; /* 卡片之間的間距 */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px; /* 稍微縮小間距，讓卡片本體更寬 */
             width: 100%;
-            max-width: 1000px; /* 配合你主地圖的寬度 */
-            margin: 20px auto;
         }
         
         /* 響應式修正：當螢幕寬度小於 600px (手機) 時，變回一列一個 */
@@ -154,12 +152,17 @@
             .tips-grid {
                 grid-template-columns: 1fr;
             }
+            .container {
+                padding: 10px; /* 手機端縮小邊距，讓卡片更寬 */
+            }
         }
         
         /* 摺疊卡片樣式優化 */
         .hero-section.collapsible {
-            margin-bottom: 0; /* 由 Grid 的 gap 統一控制間距 */
-            height: fit-content; /* 確保高度隨內容縮放 */
+            width: 100%;
+            margin-bottom: 0;
+            box-sizing: border-box;
+            border: 2px solid #e1f5fe; /* 增加邊框感，呼應動物按鈕設計 */
         }
         
         summary {
