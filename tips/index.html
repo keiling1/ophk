@@ -160,17 +160,42 @@
         /* 摺疊卡片樣式優化 */
         .hero-section.collapsible {
             width: 100%;
-            margin-bottom: 0;
+            max-width: 1000px; /* 這裡確保跟地圖寬度一致 */
+            margin: 15px 0;
+            padding: 0 !important; /* 讓內部的 summary 控制間距 */
+            border: 2px solid #0077be; /* 模仿按鈕的邊框感 */
+            background: white;
+            border-radius: 15px;
             box-sizing: border-box;
-            border: 2px solid #e1f5fe; /* 增加邊框感，呼應動物按鈕設計 */
+            overflow: hidden;
         }
         
         summary {
-            padding: 15px 20px; /* 稍微縮小內邊距以適應並排 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px; /* 增加內距，讓它像按鈕一樣厚實 */
+            cursor: pointer;
+            list-style: none;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .summary-header {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
         }
         
         .summary-header h1 {
-            font-size: 18px; /* 縮小標題字體，避免兩欄時文字溢出 */
+            font-size: 20px;
+            margin: 5px 0 0 0; /* 讓標題與標籤有一點距離 */
+            color: #222;
+        }
+        
+        /* 3. 當滑鼠懸停或點擊時，模擬按鈕的反饋感 */
+        summary:hover {
+            background-color: #f0faff;
         }
     </style>
 </head>
