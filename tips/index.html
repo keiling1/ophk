@@ -142,7 +142,8 @@
         /* 攻略容器：設定為網格佈局 */
         .tips-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 嚴格平分 */
+            /* 核心修正：使用 minmax(0, 1fr) 確保內容過長時不會撐開單元格 */
+            grid-template-columns: repeat(2, minmax(0, 1fr)); 
             gap: 15px;
             width: 100%;
             margin: 20px auto;
@@ -151,31 +152,26 @@
         /* 響應式修正：當螢幕寬度小於 600px (手機) 時，變回一列一個 */
         @media (max-width: 600px) {
             .tips-grid {
-                grid-template-columns: 1fr; /* 改為一欄 */
+                grid-template-columns: 1fr;
             }
         }
         
         /* 摺疊卡片樣式優化 */
         .hero-section.collapsible {
-            /* 核心修正：強制寬度等於父層 Grid 的分配空間，扣除可能的邊框 */
             width: 100%; 
-            min-width: 100%; /* 防止縮小 */
-            max-width: 100%; /* 防止展開時變寬 */
-            
-            box-sizing: border-box; /* 確保邊框算在寬度內 */
+            box-sizing: border-box; /* 確保邊框在寬度內計算 */
             margin: 0;
             padding: 0 !important;
             border: 2px solid #0077be;
             background: white;
             border-radius: 15px;
-            overflow: hidden;
-            display: block; /* 統一瀏覽器行為 */
+            overflow: hidden; /* 預防內容撐開 */
         }
 
         .collapsible .content p {
             margin: 0;
-            word-break: break-all; /* 強制斷行 */
-            overflow-wrap: break-word;
+            word-break: break-all; /* 針對長英文單字強制斷行 */
+            white-space: normal;
         }
         
         summary {
@@ -207,11 +203,10 @@
         }
 
         summary, .collapsible .content {
+            display: block; /* 統一標籤行為 */
             width: 100% !important;
-            max-width: 100% !important;
-            min-width: 100% !important;
             box-sizing: border-box;
-            display: block;
+            padding: 20px;
         }
     </style>
 </head>
