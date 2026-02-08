@@ -145,7 +145,7 @@
             grid-template-columns: repeat(1, 1fr); /* 一列兩個，平均分配寬度 */
             gap: 20px; /* 卡片之間的間距 */
             width: 100%;
-            max-width: 1000px; /* 配合你主地圖的寬度 */
+            max-width: 600px; /* 配合你主地圖的寬度 */
             margin: 20px auto;
         }
         
@@ -161,10 +161,19 @@
         
         /* 摺疊卡片樣式優化 */
         .hero-section.collapsible {
-            width: 100%;
-            margin-bottom: 0;
-            box-sizing: border-box;
-            border: 2px solid #e1f5fe; /* 增加邊框感，呼應動物按鈕設計 */
+            width: 295px !important; 
+            min-width: 295px !important;
+            max-width: 295px !important;
+            
+            /* 核心：鎖定盒子模型，不讓 padding 或 border 增加寬度 */
+            box-sizing: border-box; 
+            
+            margin: 0;
+            padding: 0 !important;
+            border: 2px solid #0077be;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
         }
         
         summary {
@@ -173,6 +182,21 @@
         
         .summary-header h1 {
             font-size: 18px; /* 縮小標題字體，避免兩欄時文字溢出 */
+        }
+
+        summary, .collapsible .content {
+            width: 295px !important;
+            min-width: 295px !important;
+            max-width: 295px !important;
+            box-sizing: border-box;
+            padding: 20px;
+            display: block;
+        }
+
+        .collapsible .content p {
+            width: 100%;
+            word-break: break-all;
+            white-space: normal;
         }
     </style>
 </head>
