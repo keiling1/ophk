@@ -182,6 +182,11 @@
             display: flex; flex-direction: column; align-items: center;
             font-size: 16px; font-weight: bold;
         }
+        @media (max-width: 600px) {
+            .nav-card {
+                grid-template-columns: 1fr; /* 手機上一行一個，依然維持 100% 寬度 */
+            }
+        }
     </style>
 </head>
 <body>
