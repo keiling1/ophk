@@ -138,6 +138,37 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* 攻略容器：設定為網格佈局 */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 一列兩個，平均分配寬度 */
+            gap: 20px; /* 卡片之間的間距 */
+            width: 100%;
+            max-width: 1000px; /* 配合你主地圖的寬度 */
+            margin: 20px auto;
+        }
+        
+        /* 響應式修正：當螢幕寬度小於 600px (手機) 時，變回一列一個 */
+        @media (max-width: 600px) {
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 摺疊卡片樣式優化 */
+        .hero-section.collapsible {
+            margin-bottom: 0; /* 由 Grid 的 gap 統一控制間距 */
+            height: fit-content; /* 確保高度隨內容縮放 */
+        }
+        
+        summary {
+            padding: 15px 20px; /* 稍微縮小內邊距以適應並排 */
+        }
+        
+        .summary-header h1 {
+            font-size: 18px; /* 縮小標題字體，避免兩欄時文字溢出 */
+        }
     </style>
 </head>
 
@@ -165,34 +196,36 @@
                 </div>
             </details> -->
             
-            <details class="hero-section collapsible">
-                <summary>
-                    <div class="summary-header">
-                        <span class="tag">攻略一</span>
-                        <h1>入園第一站</h1>
+            <div class="tips-grid">
+                <details class="hero-section collapsible">
+                    <summary>
+                        <div class="summary-header">
+                            <span class="tag">攻略一</span>
+                            <h1>入園第一站</h1>
+                        </div>
+                        <span class="chevron">▼</span>
+                    </summary>
+                    <div class="content">
+                        <p>為了有機會看到活躍的大熊貓和兩隻大熊貓小孩，建議第一站先到<strong>亞洲動物天地的大熊貓之旅</strong>。<br>
+                        如果不幸沒有成功遇到睡醒的大熊貓，下午可以再一次挑戰。</p>
                     </div>
-                    <span class="chevron">▼</span>
-                </summary>
-                <div class="content">
-                    <p>為了有機會看到活躍的大熊貓和兩隻大熊貓小孩，建議第一站先到<strong>亞洲動物天地的大熊貓之旅</strong>。<br>
-                    如果不幸沒有成功遇到睡醒的大熊貓，下午可以再一次挑戰。</p>
-                </div>
-            </details>
-            
-            <details class="hero-section collapsible">
-                <summary>
-                    <div class="summary-header">
-                        <span class="tag">攻略二</span>
-                        <h1>香港老大街 Old Hong Kong</h1>
+                </details>
+                
+                <details class="hero-section collapsible">
+                    <summary>
+                        <div class="summary-header">
+                            <span class="tag">攻略二</span>
+                            <h1>香港老大街 Old Hong Kong</h1>
+                        </div>
+                        <span class="chevron">▼</span>
+                    </summary>
+                    <div class="content">
+                        <p>🏛️ 穿越時空，感受香港五十至七十年代的懷舊風情<br>
+                        🚃 與經典的古董老爺電車拍照留念<br>
+                         waffle 尋找消失中的傳統港式小吃和充滿人情味的舊街店舖</p>
                     </div>
-                    <span class="chevron">▼</span>
-                </summary>
-                <div class="content">
-                    <p>🏛️ 穿越時空，感受香港五十至七十年代的懷舊風情<br>
-                    🚃 與經典的古董老爺電車拍照留念<br>
-                     waffle 尋找消失中的傳統港式小吃和充滿人情味的舊街店舖</p>
-                </div>
-            </details>
+                </details>
+            </div>
 
             <!-- <h2>🐾 動物介紹</h2>
             <p>想了解更多關於這裡的明星動物嗎？點擊下方查看官方詳細介紹：</p>
