@@ -1,8 +1,128 @@
-<div class="schedule-container" style="width: 100%; height: 600px; overflow: hidden; border-radius: 15px;">
-    <iframe 
-        src="https://www.oceanpark.com.hk/tc/experience/plan-your-visit/daily-schedule" 
-        width="100%" 
-        height="100%" 
-        style="border:none;">
-    </iframe>
-</div>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+         :root {
+            --bg-image: url('../TC_GuideMap 2025_V2_POI V3.jpg');
+            --overlay-color: rgba(255, 255, 255, 0.8);
+            --accent-color: #0077be;
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; font-family: -apple-system, sans-serif }
+
+        .main-background {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-image) no-repeat center center;
+            background-size: cover; z-index: -1;
+        }
+
+        .scroll-container {
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 20px; box-sizing: border-box;
+            background: var(--overlay-color);
+        }
+
+        body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fdfdfd; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 25px; }
+        .back-link { text-decoration: none; color: #0077be; font-weight: bold; display: block; margin-bottom: 20px; }
+        
+        /* 展館標題區 */
+        .hero-section { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        h1 { margin: 0 0 10px 0; color: #222; font-size: 26px; }
+        .tag { background: #e1f5fe; color: #0077be; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: bold; }
+
+        /* 章節標題 */
+        h2 { font-size: 18px; border-left: 4px solid #0077be; padding-left: 10px; margin-top: 30px; }
+
+        /* 按鈕群組容器 */
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 一行兩個，平均分配寬度 */
+            gap: 10px; /* 按鈕之間的間距 */
+            margin: 15px 0;
+        }
+        
+        /* 稍微調整按鈕樣式，讓它在並排時不會太擠 */
+        .animal-btn {
+            display: flex;
+            flex-direction: column; /* 讓中英文垂直排列 */
+            align-items: center;    /* 水平置中 */
+            justify-content: center; /* 垂直置中 */
+            text-align: center;
+            padding: 10px 5px;
+            background: #fff;
+            border: 2px solid #0077be;
+            color: #0077be;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            
+            /* 核心修正：強制不換行，即使有空格也不拆 */
+            white-space: nowrap; 
+            
+            /* 根據按鈕寬度自動縮小字體 (選用) */
+            font-size: 15px; 
+            line-height: 1.4;
+        }
+        
+        /* 針對英文部分，稍微縮小字體以防溢出 */
+        .animal-btn .en-text {
+            font-size: 15px;
+            font-weight: normal;
+            display: block; /* 確保佔據獨立一行 */
+            margin-top: 2px;
+        }
+        
+        .animal-btn:hover {
+            background: #0077be;
+            color: #fff;
+        }
+
+        /* 員工小貼士 */
+        .pro-tips {
+            background: #e1f5fe; border-radius: 15px; padding: 20px; margin-top: 30px;
+            position: relative; overflow: hidden;
+        }
+        .pro-tips::before { content: '💡'; position: absolute; right: 10px; bottom: -5px; font-size: 50px; opacity: 0.1; }
+        .pro-tips h3 { margin-top: 0; font-size: 16px; color: #0077be; }
+    </style>
+</head>
+<body>
+    <div class="main-background"></div>
+
+    <div class="scroll-container">
+        <div class="container">
+            <a href="../" class="back-link">← 返回地圖</a>
+
+            <div class="hero-section">
+                <span class="tag">設施介紹</span>
+                <h1>香港老大街 Old Hong Kong</h1>
+                <p>🏛️ 穿越時空，感受香港五十至七十年代的懷舊風情<br>
+                🚃 與經典的古董老爺電車拍照留念<br>
+                🧇 尋找消失中的傳統港式小吃和充滿人情味的舊街店舖</p>
+            </div>
+
+            <!-- <h2>🐾 動物介紹</h2>
+            <p>想了解更多關於這裡的明星動物嗎？點擊下方查看官方詳細介紹：</p>
+            <div class="button-group">
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/southern-two-toed-sloth" class="animal-btn" target="_blank">二趾樹懶<span class="en-text">Southern Two-toed Sloth</span></a> 
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/kinkajou" class="animal-btn" target="_blank">蜜熊<span class="en-text">Kinkajou</span></a>
+                <a href="https://www.oceanpark.com.hk/tc/education-conservation/conservation/animal-and-plant-guide/macaws" class="animal-btn" target="_blank">金剛鸚鵡<span class="en-text">Macaw</span></a>
+                
+            </div> -->
+
+            <h2>👨‍🔬 小知識</h2>
+            <div class="pro-tips">
+                <h3>趣事分享</h3>
+                <p>香港老大街的入口有一個<strong>大型花牌</strong>，同款的花牌在傳統節慶的時候很常會在香港街頭出現，例如<strong>天后誕、盂蘭節等</strong>。</p>
+                <p>除了電車以外，老大街有一個<strong>英式電話亭</strong>，也算是一個拍照打卡的好地方，雖然現在香港連港式電話亭都基本上沒有了。</p>
+                <p>細心留意一下，老大街的<strong>背景音樂</strong>也是充滿時代感。整個區域的氣氛都很有穿越時空的感覺。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
