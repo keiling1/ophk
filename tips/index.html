@@ -26,7 +26,7 @@
         }
 
         body { font-family: -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fdfdfd; margin: 0; padding: 0; }
-        .container { max-width: 600px; margin: 0 auto; padding: 25px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 25px; }
         .back-link { text-decoration: none; color: #0077be; font-weight: bold; display: block; margin-bottom: 20px; }
         
         /* 展館標題區 */
@@ -142,10 +142,10 @@
         /* 攻略容器：設定為網格佈局 */
         .tips-grid {
             display: grid;
-            /* 核心修正：使用 minmax(0, 1fr) 確保內容過長時不會撐開單元格 */
-            grid-template-columns: repeat(2, minmax(0, 1fr)); 
-            gap: 15px;
+            grid-template-columns: repeat(1, 1fr); /* 一列兩個，平均分配寬度 */
+            gap: 20px; /* 卡片之間的間距 */
             width: 100%;
+            max-width: 1000px; /* 配合你主地圖的寬度 */
             margin: 20px auto;
         }
         
@@ -154,59 +154,25 @@
             .tips-grid {
                 grid-template-columns: 1fr;
             }
+            .container {
+                padding: 10px; /* 手機端縮小邊距，讓卡片更寬 */
+            }
         }
         
         /* 摺疊卡片樣式優化 */
         .hero-section.collapsible {
-            width: 100%; 
-            box-sizing: border-box; /* 確保邊框在寬度內計算 */
-            margin: 0;
-            padding: 0 !important;
-            border: 2px solid #0077be;
-            background: white;
-            border-radius: 15px;
-            overflow: hidden; /* 預防內容撐開 */
-        }
-
-        .collapsible .content p {
-            margin: 0;
-            word-break: break-all; /* 針對長英文單字強制斷行 */
-            white-space: normal;
+            width: 100%;
+            margin-bottom: 0;
+            box-sizing: border-box;
+            border: 2px solid #e1f5fe; /* 增加邊框感，呼應動物按鈕設計 */
         }
         
         summary {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 25px; /* 增加內距，讓它像按鈕一樣厚實 */
-            cursor: pointer;
-            list-style: none;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        .summary-header {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
+            padding: 15px 20px; /* 稍微縮小內邊距以適應並排 */
         }
         
         .summary-header h1 {
-            font-size: 20px;
-            margin: 5px 0 0 0; /* 讓標題與標籤有一點距離 */
-            color: #222;
-        }
-        
-        /* 3. 當滑鼠懸停或點擊時，模擬按鈕的反饋感 */
-        summary:hover {
-            background-color: #f0faff;
-        }
-
-        summary, .collapsible .content {
-            display: block; /* 統一標籤行為 */
-            width: 100% !important;
-            box-sizing: border-box;
-            padding: 20px;
+            font-size: 18px; /* 縮小標題字體，避免兩欄時文字溢出 */
         }
     </style>
 </head>
